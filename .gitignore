@@ -1,0 +1,11 @@
+
+.gdbinit
+.bash_history
+*.o
+*.bin
+*.sys
+*.elf
+Image/x64BareBonesImage.img
+Image/x64BareBonesImage.qcow2
+Image/x64BareBonesImage.vmdk
+.gdbinit
