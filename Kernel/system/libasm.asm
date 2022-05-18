@@ -1,4 +1,5 @@
 GLOBAL cpuVendor
+GLOBAL rtcGetter
 
 section .text
 	
@@ -25,4 +26,20 @@ cpuVendor:
 	mov rsp, rbp
 	pop rbp
 	ret
+
+rtcGetter:
+	; Recibe como parametro en dil (parte baja de rdi) un char que corresponde al tipo de dato que quiero del RTC. Lo devuelve en hexa.
+
+	push rbp
+	mov rbp, rsp
+
+	mov al, dil
+	out 0x70, al
+	in al, 0x71
+
+	mov rsp, rbp
+	pop rbp
+	ret
+
+
 

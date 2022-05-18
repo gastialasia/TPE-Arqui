@@ -102,6 +102,21 @@ int main()
 	ncNewline();
 
 	ncPrint("[Finished]");*/
+	ncPrint("La fecha actual es:");
+	ncNewline();
+	ncPrintHex(rtcGetter(7));
+	ncPrintChar('/');
+	ncPrintHex(rtcGetter(8));
+	ncPrintChar('/');
+	ncPrintHex(rtcGetter(9));
+	ncPrintChar(' ');
+	ncPrintHex(rtcGetter(4));
+	ncPrintChar(':');
+	ncPrintHex(rtcGetter(2));
+	ncPrintChar(':');
+	ncPrintHex(rtcGetter(0));
+	ncNewline();
+
 	while(1){
 		//ELIMINAR ESTE COMENTARIO
 	}

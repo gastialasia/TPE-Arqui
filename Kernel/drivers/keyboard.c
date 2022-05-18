@@ -4,6 +4,9 @@
 
 void keyboard_handler() {
 	char key = kbd_US[getKey()];
-	if(key)
+	if (key==8){
+		ncDeleteChar();
+	} else if(key){
 		ncPrintChar(key);
+	}
 }

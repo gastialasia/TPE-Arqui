@@ -5,6 +5,7 @@
 
 void ncPrint(const char * string);
 void ncPrintChar(char character);
+void ncDeleteChar();
 void ncPrintCharAt(char character, uint32_t x, uint32_t y);
 void ncNewline();
 void ncPrintDec(uint64_t value);

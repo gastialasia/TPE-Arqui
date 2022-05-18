@@ -26,6 +26,11 @@ void ncPrintChar(char character)
 	currentVideo += 2;
 }
 
+void ncDeleteChar(){
+	currentVideo -=2;
+	*currentVideo = ' ';
+}
+
 void ncMoveLines(){
 	for(int i=0;i<height*width*2;){
 		if (i>=(height-1)*width*2){
