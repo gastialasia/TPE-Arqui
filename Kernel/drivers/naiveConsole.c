@@ -18,8 +18,30 @@ void ncPrint(const char * string)
 
 void ncPrintChar(char character)
 {
+	if(currentVideo==(video+(width*height)*2)){
+		ncMoveLines();
+	}
+
 	*currentVideo = character;
 	currentVideo += 2;
+}
+
+void ncMoveLines(){
+	for(int i=0;i<height*width*2;){
+		if (i>=(height-1)*width*2){
+			video[i]=' ';
+			i+=2;
+		} else {
+			video[i]=video[i+width];
+			i++;
+		}
+	}
+	currentVideo=currentVideo-(width*2);
+}
+
+void ncPrintCharAt(char character, uint32_t x, uint32_t y){
+	// No tengo en cuenta currentVideo, simplemente inserto en char en el punto(x,y)
+	video[(width*y+x)*2]=character;
 }
 
 void ncNewline()
