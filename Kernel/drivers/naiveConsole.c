@@ -32,7 +32,7 @@ void ncMoveLines(){
 			video[i]=' ';
 			i+=2;
 		} else {
-			video[i]=video[i+width];
+			video[i]=video[i+width*2];
 			i++;
 		}
 	}
