@@ -3,6 +3,7 @@
 #include <lib.h>
 #include <moduleLoader.h>
 #include <naiveConsole.h>
+#include <idtLoader.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -84,7 +85,8 @@ int main()
 {	
 	ncPrint("[Kernel Main]");
 	ncNewline();
-	ncPrint("  Sample code module at 0x");
+	load_idt();
+	/*ncPrint("  Sample code module at 0x");
 	ncPrintHex((uint64_t)sampleCodeModuleAddress);
 	ncNewline();
 	ncPrint("  Calling the sample code module returned: ");
@@ -99,6 +101,9 @@ int main()
 	ncPrint((char*)sampleDataModuleAddress);
 	ncNewline();
 
-	ncPrint("[Finished]");
+	ncPrint("[Finished]");*/
+	while(1){
+		//ELIMINAR ESTE COMENTARIO
+	}
 	return 0;
 }
