@@ -3,7 +3,7 @@
 #include <lib.h>
 
 void keyboard_handler() {
-	char key = kbd_US[getKey()];
+	unsigned char key = ASCIITable[getKey()];
 	if (key==8){
 		ncDeleteChar();
 	} else if(key){
