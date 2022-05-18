@@ -10,3 +10,5 @@ Image/x64BareBonesImage.qcow2
 Image/x64BareBonesImage.vmdk
 .gdbinit
 .gdb_history
+*.log
+*.json
