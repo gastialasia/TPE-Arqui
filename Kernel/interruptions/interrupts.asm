@@ -15,8 +15,11 @@ GLOBAL _irq05Handler
 
 GLOBAL _exception0Handler
 
+GLOBAL _syscallHandler
+
 EXTERN irqDispatcher
 EXTERN exceptionDispatcher
+EXTERN syscallDispatcher
 
 SECTION .text
 
@@ -70,8 +73,6 @@ SECTION .text
 	iretq
 %endmacro
 
-
-
 %macro exceptionHandler 1
 	pushState
 
@@ -82,6 +83,19 @@ SECTION .text
 	iretq
 %endmacro
 
+
+%macro syscallHandlerMaster 0
+	pushState
+
+	;mov rdi, %1 ; pasaje de parametro
+	;mov rsi, %2
+	;mov rdx, %3
+	;mov rcx, %4
+	call syscallDispatcher
+
+	popState
+	iretq
+%endmacro
 
 _hlt:
 	sti
@@ -142,6 +156,10 @@ _irq05Handler:
 ;Zero Division Exception
 _exception0Handler:
 	exceptionHandler 0
+
+;Software Interruption
+_syscallHandler:
+	syscallHandlerMaster 
 
 haltcpu:
 	cli

@@ -47,21 +47,4 @@ rtcGetter:
 	pop rbp
 	ret
 
-sys_read:
-
-	
-	
-
-sys_write:
-	push rbp
-	mov rbp,rsp
-	
-	call ncPrintChar
-
-sys_memdump:
-
-sys_date:
-
-sys_regdump:
-
 
