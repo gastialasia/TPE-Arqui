@@ -1,5 +1,11 @@
 GLOBAL cpuVendor
 GLOBAL rtcGetter
+GLOBAL sys_read
+GLOBAL sys_write
+GLOBAL sys_memdump
+GLOBAL sys_date
+GLOBAL sys_regdump
+
 
 section .text
 	
@@ -41,5 +47,21 @@ rtcGetter:
 	pop rbp
 	ret
 
+sys_read:
+
+	
+	
+
+sys_write:
+	push rbp
+	mov rbp,rsp
+	
+	call ncPrintChar
+
+sys_memdump:
+
+sys_date:
+
+sys_regdump:
 
 
