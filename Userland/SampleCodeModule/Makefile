@@ -9,6 +9,11 @@ $(MODULE): $(SOURCES)
 	$(GCC) $(GCCFLAGS) -T sampleCodeModule.ld _loader.c $(SOURCES) -o ../$(MODULE)
 	$(GCC) $(GCCFLAGS) -I./include -T sampleCodeModule.ld -Wl,--oformat=elf64-x86-64 _loader.c $(SOURCES) -o ../$(MODULE) -o ../0000-sampleCodeModule.elf
 
+%.o : %.asm
+	$(ASM) $(ASMFLAGS) $< -o $@
+%.o: %.c
+	$(GCC) $(GCCFLAGS) -I./include -c $< -o $@
+
 clean:
 	rm -rf *.o
 
