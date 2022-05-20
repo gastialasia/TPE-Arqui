@@ -16,11 +16,10 @@ GLOBAL _irq05Handler
 GLOBAL _exception0Handler
 
 GLOBAL _syscallHandler
-
+EXTERN syscallsetter
 EXTERN irqDispatcher
 EXTERN exceptionDispatcher
-;EXTERN syscallDispatcher
-EXTERN write
+EXTERN syscallDispatcher
 
 SECTION .text
 
@@ -87,12 +86,13 @@ SECTION .text
 
 %macro syscallHandlerMaster 0
 	pushState
+	push rdi
+	mov rdi,rax
+	call syscallsetter
+	pop rdi
 
-	cmp rax, 2
-	jne .end
-	call write
+	call syscallDispatcher
 
-.end:	
 	popState
 	iretq
 %endmacro
