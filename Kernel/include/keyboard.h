@@ -17,4 +17,6 @@ void keyboard_handler();
 
 unsigned char getKey(); 
 
+unsigned char readKey(); 
+
 #endif
