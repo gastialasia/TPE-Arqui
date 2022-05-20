@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <syscalls.h>
+#include <naiveConsole.h>
 
 int64_t syscallDispatcher(int64_t syscallNumber, int64_t arg0, int64_t arg1, int64_t arg2) {
     switch (syscallNumber)

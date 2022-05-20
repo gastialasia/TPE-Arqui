@@ -19,7 +19,8 @@ GLOBAL _syscallHandler
 
 EXTERN irqDispatcher
 EXTERN exceptionDispatcher
-EXTERN syscallDispatcher
+;EXTERN syscallDispatcher
+EXTERN write
 
 SECTION .text
 
@@ -87,12 +88,11 @@ SECTION .text
 %macro syscallHandlerMaster 0
 	pushState
 
-	;mov rdi, %1 ; pasaje de parametro
-	;mov rsi, %2
-	;mov rdx, %3
-	;mov rcx, %4
-	call syscallDispatcher
+	cmp rax, 2
+	jne .end
+	call write
 
+.end:	
 	popState
 	iretq
 %endmacro
@@ -159,7 +159,7 @@ _exception0Handler:
 
 ;Software Interruption
 _syscallHandler:
-	syscallHandlerMaster 
+	syscallHandlerMaster
 
 haltcpu:
 	cli

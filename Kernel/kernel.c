@@ -86,6 +86,9 @@ int main()
 	ncPrint("[Kernel Main]");
 	ncNewline();
 	load_idt();
+	ncPrint("antes");
+	test();
+	ncPrint("despues");
 	/*ncPrint("  Sample code module at 0x");
 	ncPrintHex((uint64_t)sampleCodeModuleAddress);
 	ncNewline();
@@ -102,7 +105,7 @@ int main()
 	ncNewline();
 
 	ncPrint("[Finished]");*/
-	ncPrint("La fecha actual es:");
+	/*ncPrint("La fecha actual es:");
 	ncNewline();
 	ncPrintHex(rtcGetter(7));
 	ncPrintChar('/');
@@ -116,7 +119,7 @@ int main()
 	ncPrintChar(':');
 	ncPrintHex(rtcGetter(0));
 	ncNewline();
-
+	*/
 	while(1){
 		//ELIMINAR ESTE COMENTARIO
 	}

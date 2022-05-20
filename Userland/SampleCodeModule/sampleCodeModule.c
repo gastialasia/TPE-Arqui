@@ -13,8 +13,6 @@ int main() {
 	*v = 'X';
 	*(v+1) = 0x74;
 
-	test();
-
 	//Test if BSS is properly set up
 	if (var1 == 0 && var2 == 0)
 		return 0xDEADC0DE;

@@ -1,11 +1,6 @@
 GLOBAL cpuVendor
 GLOBAL rtcGetter
-GLOBAL sys_read
-GLOBAL sys_write
-GLOBAL sys_memdump
-GLOBAL sys_date
-GLOBAL sys_regdump
-
+GLOBAL test
 
 section .text
 	
@@ -46,5 +41,24 @@ rtcGetter:
 	mov rsp, rbp
 	pop rbp
 	ret
+	
+test:
+    push rbp
+    mov rbp, rsp
+
+    mov rax, 2
+    mov rdi, 1
+    mov rsi, str1
+    mov rdx, len1
+
+    int 80h
+
+    mov rsp, rbp
+    pop rbp
+    ret
+    
+section .data
+str1 db "pito2", 0
+len1 equ $ - str1
 
 
