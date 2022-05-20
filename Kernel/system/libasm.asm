@@ -2,6 +2,8 @@ GLOBAL cpuVendor
 GLOBAL rtcGetter
 GLOBAL test
 
+EXTERN _sti
+
 section .text
 	
 cpuVendor:
@@ -46,9 +48,16 @@ test:
     push rbp
     mov rbp, rsp
 
-    mov rax, 2
+    mov rax, 1
     mov rdi, 1
-    mov rsi, str1
+    mov rsi, str2
+    mov rdx, len1
+	
+	int 80h
+	
+	mov rax, 2
+    mov rdi, 1
+    mov rsi, str2
     mov rdx, len1
 
     int 80h
@@ -56,9 +65,13 @@ test:
     mov rsp, rbp
     pop rbp
     ret
-    
+
 section .data
-str1 db "pito2", 0
-len1 equ $-str1-1
+len1 equ 4
+str2 db "hola",0
+
+section .bss
+str1 resb 8
+
 
 

@@ -6,4 +6,6 @@
 
 int64_t write(int fd, const char * buffer, size_t count);
 
+int64_t read(int fd, char * buffer, size_t count);
+
 #endif

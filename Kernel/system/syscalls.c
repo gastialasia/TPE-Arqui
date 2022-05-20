@@ -1,6 +1,7 @@
 #include <naiveConsole.h>
 #include <syscalls.h>
 #include <keyboard.h>
+#include <interrupts.h>
 
 int64_t write(int fd, const char * buffer, size_t count){
 	switch(fd){
@@ -17,11 +18,15 @@ int64_t write(int fd, const char * buffer, size_t count){
 
 int64_t read(int fd, char * buffer, size_t count){
 	if(fd==1){
+		_sti();
+
 		int k = 0;
 		unsigned char key = 0;
+
 		while(key!='\n'&&k<count){
 			key = readKey();
 			if (key){
+				ncPrintDec(1);
 				ncPrintChar(key);
 				buffer[k++]=key;
 			}
@@ -30,7 +35,7 @@ int64_t read(int fd, char * buffer, size_t count){
 			ncNewline();
 		}
 		buffer[k]=0;
-		return count; //placeholder
+		return k; //placeholder
 	}
 	return -1;
 
