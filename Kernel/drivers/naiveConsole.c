@@ -24,6 +24,11 @@ void ncPrintChar(char character)
 		ncMoveLines();
 	}
 
+	if(character == '\n') {
+		ncNewline();
+		return;
+	}
+
 	*currentVideo = character;
 	currentVideo += 2;
 }

@@ -59,6 +59,6 @@ test:
     
 section .data
 str1 db "pito2", 0
-len1 equ $ - str1
+len1 equ $-str1-1
 
 
