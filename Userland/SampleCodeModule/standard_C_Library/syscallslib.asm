@@ -6,3 +6,8 @@ sys_write:          ; Los registros de rdi, rsi y rdx ya están cargados por los
     mov rax,2
     int 80h
     ret
+
+sys_read:
+    mov rax,1
+    int 80h
+    ret

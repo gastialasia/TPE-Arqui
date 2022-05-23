@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include <syscallslib.h>
 
+#define STDIN 1
+#define MAXBUFFER 100
+
 int strlen(const char * str) {
     int len=0;
     while(str[len]!=0){
@@ -10,5 +13,9 @@ int strlen(const char * str) {
 }
 
 void printf(const char * str) {
-    sys_write(1, str, strlen(str)); //se puede romper aca
+    sys_write(STDIN, str, strlen(str)); //se puede romper aca
+}
+
+void scanf(char * buffer) {
+    return sys_read(STDIN,buffer,MAXBUFFER);
 }

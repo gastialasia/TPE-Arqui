@@ -86,9 +86,9 @@ int main()
 	ncPrint("[Kernel Main]");
 	ncNewline();
 	load_idt();
-	ncPrint("antes");
-	test();
-	ncPrint("despues");
+	//ncPrint("antes");
+	//test();
+	//ncPrint("despues");
 	/*ncPrint("  Sample code module at 0x");
 	ncPrintHex((uint64_t)sampleCodeModuleAddress);
 	ncNewline();
@@ -120,8 +120,6 @@ int main()
 	ncPrintHex(rtcGetter(0));
 	ncNewline();
 	*/
-	while(1){
-		//ELIMINAR ESTE COMENTARIO
-	}
+	((EntryPoint)sampleCodeModuleAddress)();
 	return 0;
 }
