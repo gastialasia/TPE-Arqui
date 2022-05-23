@@ -1,4 +1,5 @@
 GLOBAL sys_write
+GLOBAL sys_read
 
 section .text
 

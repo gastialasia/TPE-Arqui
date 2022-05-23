@@ -16,6 +16,6 @@ void printf(const char * str) {
     sys_write(STDIN, str, strlen(str)); //se puede romper aca
 }
 
-void scanf(char * buffer) {
+int scanf(char * buffer) {
     return sys_read(STDIN,buffer,MAXBUFFER);
 }

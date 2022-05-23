@@ -5,6 +5,6 @@ int strlen(const char *);
 
 void printf(const char *);
 
-void scanf(char * buffer);
+int scanf(char * buffer);
 
 #endif
