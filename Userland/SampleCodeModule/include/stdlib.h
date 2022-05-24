@@ -15,7 +15,7 @@ int scanf(char * buffer);
 
 void clear();
 
-char date(char value);
+void printdate();
 
 uint64_t hex2int(char *hex, int *ok);
 

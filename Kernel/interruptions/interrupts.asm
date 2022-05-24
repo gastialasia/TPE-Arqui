@@ -23,8 +23,7 @@ EXTERN syscallDispatcher
 
 SECTION .text
 
-%macro pushState 0
-	push rax
+%macro pushStateWithoutRax 0
 	push rbx
 	push rcx
 	push rdx
@@ -41,7 +40,12 @@ SECTION .text
 	push r15
 %endmacro
 
-%macro popState 0
+%macro pushState 0
+	push rax
+	pushStateWithoutRax
+%endmacro
+
+%macro popStateWithoutRax 0
 	pop r15
 	pop r14
 	pop r13
@@ -56,6 +60,10 @@ SECTION .text
 	pop rdx
 	pop rcx
 	pop rbx
+%endmacro
+
+%macro popState 0
+	popStateWithoutRax
 	pop rax
 %endmacro
 
@@ -85,7 +93,7 @@ SECTION .text
 
 
 %macro syscallHandlerMaster 0
-	pushState
+	pushStateWithoutRax
 	push rdi
 	mov rdi,rax
 	call syscallsetter
@@ -93,7 +101,7 @@ SECTION .text
 
 	call syscallDispatcher
 
-	popState
+	popStateWithoutRax
 	iretq
 %endmacro
 

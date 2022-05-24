@@ -88,11 +88,24 @@ void clear(){
     sys_clear();
 }
 
-char date(char value){
-    char num = sys_date(value);
-    char buf[2];
-    uintToBase(num,buf,10);
-    printf(buf);
+
+void printdate(){
+    int values[5] = {7,8,9,4,2}; //En orden: D, M, Y, H, M
+    //char * separators[5] = {" "," "," "," "};
+    char buffer[2]; // Cada numero de la fecha no va a tener más de dos digitos
+    for (int i=0;i<5;i++){
+        char num = sys_date(values[i]);
+        uintToBase(num,buffer,16);
+        printf(buffer);
+        if (i<2){
+            printf("/");
+        } else if (i==3){
+            printf(":");
+        } else {
+            printf(" ");
+        }
+    }
+    printf("UTC\n");
 }
 
 

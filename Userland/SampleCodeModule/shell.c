@@ -4,9 +4,9 @@
 
 void shell(void){
     char buffer[LENGTH];
+    printf("La fecha actual es: ");
+    printdate();
     while(1){
-        int num = date(6);
-        printInt(num);
         printf("User:$ ");
         int length = scanf(buffer);
         printf("Programa: ");
