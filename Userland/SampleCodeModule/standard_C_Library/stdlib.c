@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <syscallslib.h>
+#include <stdint.h>
 
 #define STDIN 1
 #define MAXBUFFER 100
@@ -19,6 +20,7 @@ void printf(const char * str) {
 int scanf(char * buffer) {
     return sys_read(STDIN,buffer,MAXBUFFER);
 }
+
 uint64_t hex2int(char *hex, int *ok) {
     uint64_t val = 0;
     while (*hex) {

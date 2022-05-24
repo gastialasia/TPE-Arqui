@@ -1,6 +1,7 @@
 /* sampleCodeModule.c */
 
 #include <stdlib.h>
+#include <shell.h>
 
 char * v = (char*)0xB8000 + 79 * 2;
 
@@ -20,6 +21,6 @@ int main() {
 
 	return 0xDEADBEEF;
 	*/
-	printf("Esto es una prueba");
+	shell();
 	return 0;
 }
