@@ -51,7 +51,14 @@ int64_t read(int fd, char * buffer, size_t count){
 
 }
 
-
+void printMem(uint64_t pointer){
+	uint8_t *start = (uint8_t*) pointer;
+	for(int i =0; i < 32;i++){
+		ncPrintHex(start[i]);
+		ncPrint(' ');
+	}
+	ncNewline();
+}
 
 /*char * date(){ //falta arreglar hexa y concatenar todo para el out.
 	char out[16];
