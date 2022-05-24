@@ -10,6 +10,6 @@ int64_t read(int fd, char * buffer, size_t count);
 
 void clear();
 
-char date(char value);
+int64_t date(char value);
 
 #endif

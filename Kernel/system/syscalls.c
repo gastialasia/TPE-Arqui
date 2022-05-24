@@ -63,7 +63,7 @@ void clear(){
 	ncClear();
 }
 
-char date(char value){
+int64_t date(char value){
 	return rtcGetter(value);
 }
 
