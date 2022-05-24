@@ -13,7 +13,6 @@ int64_t write(int fd, const char * buffer, size_t count){
 		default:
 			return -1;
 	}
-
 }
 
 int64_t read(int fd, char * buffer, size_t count){
@@ -59,6 +58,16 @@ void printMem(uint64_t pointer){
 	}
 	ncNewline();
 }
+
+void clear(){
+	ncClear();
+}
+
+char date(char value){
+	return rtcGetter(value);
+}
+
+//int date(char value)
 
 /*char * date(){ //falta arreglar hexa y concatenar todo para el out.
 	char out[16];

@@ -17,8 +17,13 @@ int64_t syscallDispatcher(int64_t arg0, int64_t arg1, int64_t arg2) {
         return read((int) arg0, (char*) arg1, (size_t) arg2);
     case 2:
         return write((int) arg0, (const char*) arg1, (size_t) arg2);
-    case 10:
-	return printMem((uint64_t) arg0);
+    case 3:
+        clear();
+        return;
+    case 4:
+	   return printMem((uint64_t) arg0);
+    case 6:
+        return date((char)arg0);
     default:
         return -1;
     }

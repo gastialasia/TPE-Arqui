@@ -5,9 +5,17 @@
 
 int strlen(const char *);
 
+void putchar(const char c);
+
 void printf(const char *);
 
+void printInt(int num);
+
 int scanf(char * buffer);
+
+void clear();
+
+char date(char value);
 
 uint64_t hex2int(char *hex, int *ok);
 
