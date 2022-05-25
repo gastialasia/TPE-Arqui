@@ -17,6 +17,10 @@ void clear();
 
 void printdate();
 
-uint64_t hex2int(char *hex, int *ok);
+char getchar();
+
+int strcmp(const char *str1, const char *str2);
+
+//uint64_t hex2int(char *hex, int *ok);
 
 #endif

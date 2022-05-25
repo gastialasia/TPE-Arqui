@@ -14,7 +14,7 @@ int strlen(const char * str) {
 }
 
 void putchar(const char c){
-    sys_write(STDIN, c, 1);
+    sys_write(STDIN, &c, 1);
 }
 
 void printf(const char * str) {
@@ -58,6 +58,12 @@ void printInt(int num){
     char buffer[10];
     int len = uintToBase(num,buffer,10);
     sys_write(STDIN, buffer, len);
+}
+
+char getchar(){
+    char c;
+    sys_read(STDIN,&c,1);
+    return c;
 }
 
 int scanf(char * buffer) {
@@ -106,6 +112,21 @@ void printdate(){
         }
     }
     printf("UTC\n");
+}
+
+// Devuelve 1 si son iguales, 0 sino
+int strcmp(const char *str1, const char *str2){
+    int pos=0;
+    while(str1[pos]&&str2[pos]){
+        if (str1[pos]!=str2[pos]){
+            return 0;
+        }
+        pos++;
+    }
+    if(str1[pos]||str2[pos]){
+        return 0;
+    }
+    return 1;
 }
 
 

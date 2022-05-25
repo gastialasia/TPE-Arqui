@@ -4,13 +4,14 @@
 
 void shell(void){
     char buffer[LENGTH];
-    printf("La fecha actual es: ");
-    printdate();
     while(1){
         printf("User:$ ");
         int length = scanf(buffer);
-        printf("Programa: ");
-        printf(buffer);
+        buffer[length]=0;
+        if (strcmp(buffer,"date")){
+            printf("La fecha actual es: ");
+            printdate();
+        }
         //Acá va el procesamiento de lo que recibio la funcion para ejecutar un programita
     }
 }
