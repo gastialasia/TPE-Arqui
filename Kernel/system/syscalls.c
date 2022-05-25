@@ -71,9 +71,54 @@ int64_t date(char value){
 void inforeg(){
 	registersT* regs; //Pasamos el puntero a la struct para llenarla con los valores de los registros
 	regs=getRegisters();  //en la funcion fillRegisters de libasm
-	ncPrintHex(regs->rax);
-	ncNewline();
+	ncPrint("RAX: ");
 	ncPrintDec(regs->rax);
+	ncNewline();
+	ncPrint("RBX: ");
+	ncPrintDec(regs->rbx);
+	ncNewline();
+	ncPrint("RCX: ");
+	ncPrintDec(regs->rcx);
+	ncNewline();
+	ncPrint("RDX: ");
+	ncPrintDec(regs->rdx);
+	ncNewline();
+	ncPrint("RDI: ");
+	ncPrintDec(regs->rdi);
+	ncNewline();
+	ncPrint("RSI: ");
+	ncPrintDec(regs->rsi);
+	ncNewline();
+	ncPrint("RBP: ");
+	ncPrintDec(regs->rbp);
+	ncNewline();
+	ncPrint("RSP: ");
+	ncPrintDec(regs->rsp);
+	ncNewline();
+	ncPrint("R8: ");
+	ncPrintDec(regs->r8);
+	ncNewline();
+	ncPrint("R9: ");
+	ncPrintDec(regs->r9);
+	ncNewline();
+	ncPrint("R10: ");
+	ncPrintDec(regs->r10);
+	ncNewline();
+	ncPrint("R11: ");
+	ncPrintDec(regs->r11);
+	ncNewline();
+	ncPrint("R12: ");
+	ncPrintDec(regs->r12);
+	ncNewline();
+	ncPrint("R13: ");
+	ncPrintDec(regs->r13);
+	ncNewline();
+	ncPrint("R14: ");
+	ncPrintDec(regs->r14);
+	ncNewline();
+	ncPrint("R15: ");
+	ncPrintDec(regs->r15);
+	ncNewline();
 }
 
 //int date(char value)

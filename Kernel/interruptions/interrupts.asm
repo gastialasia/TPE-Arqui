@@ -20,6 +20,7 @@ EXTERN syscallsetter
 EXTERN irqDispatcher
 EXTERN exceptionDispatcher
 EXTERN syscallDispatcher
+EXTERN inforeg
 
 SECTION .text
 
@@ -86,8 +87,10 @@ SECTION .text
 
 	mov rdi, %1 ; pasaje de parametro
 	call exceptionDispatcher
-
+	call inforeg
 	popState
+	;MOVER EL INSTRUCTION POINTER
+
 	iretq
 %endmacro
 
