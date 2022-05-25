@@ -1,7 +1,8 @@
 #include <naiveConsole.h>
-#include <syscalls.h>
 #include <keyboard.h>
 #include <interrupts.h>
+#include <syscalls.h>
+#include <lib.h>
 
 int64_t write(int fd, const char * buffer, size_t count){
 	switch(fd){
@@ -65,6 +66,14 @@ void clear(){
 
 int64_t date(char value){
 	return rtcGetter(value);
+}
+
+void inforeg(){
+	registersT* regs; //Pasamos el puntero a la struct para llenarla con los valores de los registros
+	regs=getRegisters();  //en la funcion fillRegisters de libasm
+	ncPrintHex(regs->rax);
+	ncNewline();
+	ncPrintDec(regs->rax);
 }
 
 //int date(char value)

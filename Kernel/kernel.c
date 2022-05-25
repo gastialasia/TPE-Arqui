@@ -4,6 +4,7 @@
 #include <moduleLoader.h>
 #include <naiveConsole.h>
 #include <idtLoader.h>
+#include <syscalls.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -120,6 +121,9 @@ int main()
 	ncPrintHex(rtcGetter(0));
 	ncNewline();
 	*/
-	((EntryPoint)sampleCodeModuleAddress)();
+
+	inforeg();
+
+	//((EntryPoint)sampleCodeModuleAddress)();
 	return 0;
 }

@@ -1,6 +1,7 @@
 GLOBAL cpuVendor
 GLOBAL rtcGetter
 GLOBAL test
+GLOBAL getRegisters
 
 EXTERN _sti
 
@@ -65,4 +66,32 @@ test:
 ;str1 resb 8
 
 
+getRegisters:
+	push rbp
+	mov rbp, rsp
 
+	mov [struct_reg], rax
+	mov [struct_reg+1*8], rbx
+	mov [struct_reg+2*8], rcx
+	mov [struct_reg+3*8], rdx
+	mov [struct_reg+4*8], rdi
+	mov [struct_reg+5*8], rsi
+	mov [struct_reg+6*8], rbp
+	mov [struct_reg+7*8], rsp
+	mov [struct_reg+8*8], r8
+	mov [struct_reg+9*8], r9
+	mov [struct_reg+10*8], r10
+	mov [struct_reg+11*8], r11
+	mov [struct_reg+12*8], r12
+	mov [struct_reg+13*8], r13
+	mov [struct_reg+14*8], r14
+	mov [struct_reg+15*8], r15
+
+	mov rax, struct_reg
+
+	mov rsp, rbp
+	pop rbp
+	ret
+
+section .bss
+struct_reg resb 128
