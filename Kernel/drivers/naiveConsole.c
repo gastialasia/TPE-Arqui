@@ -92,14 +92,14 @@ void ncPrintCharR(char character)
 		ncMoveLinesR();
 	}
 
-	if ((video-currentVideoR)%(width*2)==0){
-		currentVideoR+=width+2;
-		//return;
-	}
-
 	if(character == '\n') {
 		ncNewlineR();
 		return;
+	}
+
+	if ((video-currentVideoR)%(width*2)==0){
+		currentVideoR+=width+2;
+		//return;
 	}
 
 	*currentVideoR = character;
@@ -198,7 +198,7 @@ void ncNewlineR()
 	{
 		ncPrintCharR(' ');
 	}
-	while((uint64_t)(currentVideoR - video) % (width * 2 * 2) != 0);
+	while((uint64_t)(currentVideoR - video) % (width * 2) != 0);
 }
 
 
