@@ -11,6 +11,8 @@ static uint8_t * currentVideoL = (uint8_t *)0xB8000; //posicion inicial de la di
 static uint8_t * currentVideoR = (uint8_t *)0xB8000;   //posicion inicial izq de la division de pantalla
 static int split = 0;
 
+// ncPrint (normal, left y right)
+
 void ncPrint(const char * string)
 {
 	int i;
@@ -19,6 +21,24 @@ void ncPrint(const char * string)
 		ncPrintChar(string[i]);
 }
 
+void ncPrintL(const char * string)
+{
+	int i;
+
+	for (i = 0; string[i] != 0; i++)
+		ncPrintCharL(string[i]);
+}
+
+void ncPrintR(const char * string)
+{
+	int i;
+
+	for (i = 0; string[i] != 0; i++)
+		ncPrintCharR(string[i]);
+}
+
+// ncSplit
+
 void ncSplit(){
 	ncClear();
 	for(int i = 0; i < height; i++){
@@ -26,6 +46,8 @@ void ncSplit(){
 	}
 	split = 1;
 }
+
+// ncPrintChar (normal, left y right)
 
 void ncPrintChar(char character)
 {
@@ -44,8 +66,8 @@ void ncPrintChar(char character)
 
 void ncPrintCharL(char character)
 {
-	if(currentVideoL==(video+(width*height)*2)){
-		ncMoveLines();
+	if(currentVideoL==((video+(width*height)*2)-width)){
+		ncMoveLinesL();
 	}
 
 	if(character == '\n') {
@@ -72,6 +94,7 @@ void ncPrintCharR(char character)
 
 	if ((video-currentVideoR)%(width*2)==0){
 		currentVideoR+=width+2;
+		//return;
 	}
 
 	if(character == '\n') {
@@ -83,10 +106,14 @@ void ncPrintCharR(char character)
 	currentVideoR += 2;
 }
 
+// ncDeleteChar(normal)
+
 void ncDeleteChar(){
 	currentVideo -=2;
 	*currentVideo = ' ';
 }
+
+// ncMoveLines (normal, left y right)
 
 void ncMoveLines(){
 	for(int i=0;i<height*width*2;){
@@ -101,8 +128,26 @@ void ncMoveLines(){
 	currentVideo=currentVideo-(width*2);
 }
 
+void ncMoveLinesL(){
+	for(int i=width;i<height*width*2;){
+		if (i%(width)==0){
+			i+=width;
+		}
+		if (i>=(height-1)*width*2){
+			video[i]=' ';
+			i+=2;
+		} else {
+			video[i]=video[i+width*2];
+			i++;
+		}
+	
+		
+	}
+	currentVideoL=currentVideoL-(width*2);
+}
+
 void ncMoveLinesR(){
-	for(int i=80;i<height*width*2;){
+	for(int i=width;i<height*width*2;){
 		if (i%(width*2)==0){
 			i+=width;
 		}
@@ -117,12 +162,17 @@ void ncMoveLinesR(){
 		
 	}
 	currentVideoR=currentVideoR-(width);
+	ncPrintCharR('|');
 }
+
+// ncPrintCharAt (normal)
 
 void ncPrintCharAt(char character, uint32_t x, uint32_t y){
 	// No tengo en cuenta currentVideo, simplemente inserto en char en el punto(x,y)
 	video[(width*y+x)*2]=character;
 }
+
+// ncNewLine (normal, left y right)
 
 void ncNewline()
 {
@@ -175,28 +225,78 @@ void ncNewlineR()
 
 
 
-
+// ncPrintDec (normal, left y right)
 
 void ncPrintDec(uint64_t value)
 {
 	ncPrintBase(value, 10);
 }
 
+void ncPrintDecL(uint64_t value)
+{
+	ncPrintBaseL(value, 10);
+}
+
+void ncPrintDecR(uint64_t value)
+{
+	ncPrintBaseR(value, 10);
+}
+
+// ncPrintHex (normal, left y right)
+
 void ncPrintHex(uint64_t value)
 {
 	ncPrintBase(value, 16);
 }
+
+void ncPrintHexL(uint64_t value)
+{
+	ncPrintBaseL(value, 16);
+}
+
+void ncPrintHexR(uint64_t value)
+{
+	ncPrintBaseR(value, 16);
+}
+
+// ncPrintBin (normal, left y right)
 
 void ncPrintBin(uint64_t value)
 {
 	ncPrintBase(value, 2);
 }
 
+void ncPrintBinL(uint64_t value)
+{
+	ncPrintBaseL(value, 2);
+}
+
+void ncPrintBinR(uint64_t value)
+{
+	ncPrintBaseR(value, 2);
+}
+
+// ncPrintBase (normal, left y right)
+
 void ncPrintBase(uint64_t value, uint32_t base)
 {
     uintToBase(value, buffer, base);
     ncPrint(buffer);
 }
+
+void ncPrintBaseL(uint64_t value, uint32_t base)
+{
+    uintToBase(value, buffer, base);
+    ncPrintL(buffer);
+}
+
+void ncPrintBaseR(uint64_t value, uint32_t base)
+{
+    uintToBase(value, buffer, base);
+    ncPrintR(buffer);
+}
+
+// ncClear (normal)
 
 void ncClear()
 {
