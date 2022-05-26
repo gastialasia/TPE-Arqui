@@ -129,8 +129,8 @@ void ncMoveLines(){
 }
 
 void ncMoveLinesL(){
-	for(int i=width;i<height*width*2;){
-		if (i%(width)==0){
+	for(int i=0;i<height*width*2;){
+		if (i&&i%(width)==0){
 			i+=width;
 		}
 		if (i>=(height-1)*width*2){
