@@ -12,7 +12,7 @@
 int64_t write(int fd, const char * buffer, size_t count){
 	switch(fd){
 		case STDIN:
-			ncUnSplit();
+			//ncUnSplit();
 			for(int i = 0; i < count; i++){
 				ncPrintChar(buffer[i]);
 			}
@@ -35,7 +35,7 @@ int64_t write(int fd, const char * buffer, size_t count){
 }
 
 int64_t read(int fd, char * buffer, size_t count){
-	if(fd==1){
+	if(fd==STDIN){
 		_sti();
 		int k = 0;
 		unsigned char key = 0;
@@ -46,7 +46,7 @@ int64_t read(int fd, char * buffer, size_t count){
 				case 0:
 					break;
 				case 8: //Borrado
-				{ 
+				{
 					ncDeleteChar();
 					k--;
 					break;

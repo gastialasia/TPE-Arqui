@@ -47,7 +47,7 @@ void ncSplit(){
 	}
 	split = 1;
 	}
-	
+
 }
 
 void ncUnSplit(){
@@ -89,7 +89,7 @@ void ncPrintCharL(char character)
 		// si llego al final del renglon, me salteo la mitad derecha y sigo escribiendo abajo
 		currentVideoL+=width;
 	}
-	
+
 
 	*currentVideoL = character;
 	currentVideoL += 2;
@@ -150,8 +150,6 @@ void ncMoveLinesL(){
 			video[i]=video[i+width*2];
 			i++;
 		}
-	
-		
 	}
 	currentVideoL=currentVideoL-(width*2);
 }
@@ -168,8 +166,8 @@ void ncMoveLinesR(){
 			video[i]=video[i+width*2];
 			i++;
 		}
-	
-		
+
+
 	}
 	currentVideoR=currentVideoR-(width);
 	ncPrintCharR('|');
