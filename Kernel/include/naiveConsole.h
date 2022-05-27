@@ -35,5 +35,6 @@ void ncPrintBaseR(uint64_t value, uint32_t base);
 void ncClear();
 
 void ncSplit();
+void ncUnSplit();
 
 #endif

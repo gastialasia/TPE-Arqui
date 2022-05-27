@@ -9,6 +9,10 @@ void putchar(const char c);
 
 void printf(const char *);
 
+void printfLeft(const char *);
+
+void printfRight(const char *);
+
 void printInt(int num);
 
 int scanf(char * buffer);

@@ -3,6 +3,11 @@
 #define LENGTH 100
 
 void shell(void){
+
+    //Pruebas:
+    //printfLeft("Llamando a printfLeft: este texto deberia aparecer del lado izquierdo de la pantalla");
+    //printfRight("Llamando a printfRight: este texto deberia aparecer del lado derecho de la pantalla puto el que lee");
+
     char buffer[LENGTH];
     while(1){
         printf("User:$ ");

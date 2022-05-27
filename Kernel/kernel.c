@@ -122,8 +122,8 @@ int main()
 	ncNewline();
 	*/
 
-	inforeg();
+	//inforeg();
 
-	//((EntryPoint)sampleCodeModuleAddress)();
+	((EntryPoint)sampleCodeModuleAddress)();
 	return 0;
 }

@@ -3,6 +3,8 @@
 #include <stdint.h>
 
 #define STDIN 1
+#define LEFTSCREEN 2
+#define RIGHTSCREEN 3
 #define MAXBUFFER 100
 
 int strlen(const char * str) {
@@ -18,7 +20,15 @@ void putchar(const char c){
 }
 
 void printf(const char * str) {
-    sys_write(STDIN, str, strlen(str)); //se puede romper aca
+    sys_write(STDIN, str, strlen(str)); 
+}
+
+void printfLeft(const char * str) {
+    sys_write(LEFTSCREEN, str, strlen(str)); 
+}
+
+void printfRight(const char * str) {
+    sys_write(RIGHTSCREEN, str, strlen(str)); 
 }
 
 uint32_t uintToBase(uint64_t value, char * buffer, uint32_t base)

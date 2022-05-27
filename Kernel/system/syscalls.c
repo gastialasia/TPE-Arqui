@@ -4,15 +4,33 @@
 #include <syscalls.h>
 #include <lib.h>
 
+#define STDIN 1
+#define LEFTSCREEN 2
+#define RIGHTSCREEN 3
+#define DEFAULT_RETVALUE -1
+
 int64_t write(int fd, const char * buffer, size_t count){
 	switch(fd){
-		case 1:
+		case STDIN:
+			ncUnSplit();
 			for(int i = 0; i < count; i++){
 				ncPrintChar(buffer[i]);
 			}
 			return count; //placeholder
+		case LEFTSCREEN:
+			ncSplit();
+			for(int i = 0; i < count; i++){
+				ncPrintCharL(buffer[i]);
+			}
+			return count;
+		case RIGHTSCREEN:
+			ncSplit();
+			for(int i = 0; i < count; i++){
+				ncPrintCharR(buffer[i]);
+			}
+			return count;
 		default:
-			return -1;
+			return DEFAULT_RETVALUE;
 	}
 }
 
@@ -47,7 +65,7 @@ int64_t read(int fd, char * buffer, size_t count){
 		_cli();
 		return k; //placeholder
 	}
-	return -1;
+	return DEFAULT_RETVALUE;
 
 }
 
@@ -120,25 +138,3 @@ void inforeg(){
 	ncPrintDec(regs->r15);
 	ncNewline();
 }
-
-//int date(char value)
-
-/*char * date(){ //falta arreglar hexa y concatenar todo para el out.
-	char out[16];
-	char * sec = rtcGetter(0);
-	char * min = rtcGetter(2);
-	char * hour= rtcGetter(4);
-	char * day = rtcGetter(7);
-	char * month = rtcGetter(8);
-	char * day = rtcGetter(9);
-	out[0] = month;
-	out[2] = '/'
-	out[3] = day;
-	out[6] = '/'
-	out[7] = year;
-	out[9] = ' '
-	out[10] = hour;
-	out[12] = '/'
-	out[13] = min;
-	
-}*/

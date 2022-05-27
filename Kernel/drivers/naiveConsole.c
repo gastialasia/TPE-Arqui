@@ -7,8 +7,8 @@ static const uint32_t width = 80;
 static const uint32_t height = 25 ;
 static uint8_t * const video = (uint8_t*)0xB8000;
 static uint8_t * currentVideo = (uint8_t*)0xB8000;
-static uint8_t * currentVideoL = (uint8_t *)0xB8000; //posicion inicial de la division de pantalla (el + 2 es para que este en la mitad mas 1 a la der)
-static uint8_t * currentVideoR = (uint8_t *)0xB8000;   //posicion inicial izq de la division de pantalla
+static uint8_t * currentVideoL = (uint8_t*)0xB8000; //posicion inicial de la division de pantalla (el + 2 es para que este en la mitad mas 1 a la der)
+static uint8_t * currentVideoR = (uint8_t*)0xB8000;   //posicion inicial izq de la division de pantalla
 static int split = 0;
 
 // ncPrint (normal, left y right)
@@ -40,11 +40,21 @@ void ncPrintR(const char * string)
 // ncSplit
 
 void ncSplit(){
+	if (!split){
 	ncClear();
 	for(int i = 0; i < height; i++){
 		ncPrintCharAt('|',width/2,i);
 	}
 	split = 1;
+	}
+	
+}
+
+void ncUnSplit(){
+	ncClear();
+	currentVideoL=video;
+	currentVideoR=video;
+	split = 0;
 }
 
 // ncPrintChar (normal, left y right)
