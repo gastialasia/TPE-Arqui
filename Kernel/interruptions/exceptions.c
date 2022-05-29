@@ -1,4 +1,5 @@
 #include <naiveConsole.h>
+#include "../include/keyboard.h"
 
 #define ZERO_EXCEPTION_ID 0
 
@@ -11,4 +12,21 @@ void exceptionDispatcher(int exception) {
 
 static void zero_division() {
 	ncPrint("ZERO DIVISION ERROR!");
+}
+
+void rebootTerm(){
+	
+	ncPrint("Presione cualquier tecla para volver a la shell");
+	
+	while(1){
+	_hlt();
+
+	unsigned char key = readKey();
+	if(key != 0){
+		break;
+	}
+
+	}
+	ncClear();
+
 }

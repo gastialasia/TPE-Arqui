@@ -3,6 +3,7 @@ GLOBAL sys_read
 GLOBAL sys_printMem
 GLOBAL sys_clear
 GLOBAL sys_date
+GLOBAL divzero
 
 section .text
 
@@ -30,3 +31,8 @@ sys_date:
     mov rax, 6
     int 80h
     ret
+
+divzero:
+  xor rax, rax
+  div rax
+  ret

@@ -21,6 +21,7 @@ EXTERN irqDispatcher
 EXTERN exceptionDispatcher
 EXTERN syscallDispatcher
 EXTERN inforeg
+EXTERN rebootTerm
 
 SECTION .text
 
@@ -89,7 +90,13 @@ SECTION .text
 	call exceptionDispatcher
 	call inforeg
 	popState
-	;MOVER EL INSTRUCTION POINTER
+	pop rax ;rip esta "arriba"  en el stack
+	
+	call rebootTerm
+
+	mov rax,400000h; muevo el nuevo rip al principio de la shell
+	push rax
+	mov qword [esp+24],10AFC0h
 
 	iretq
 %endmacro

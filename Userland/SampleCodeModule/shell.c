@@ -16,6 +16,9 @@ void shell(void){
             printf("La fecha actual es: ");
             printdate();
         }
+	else if (strcmp(buffer,"divzero\n")) {
+		divzero();
+	}
         //Acá va el procesamiento de lo que recibio la funcion para ejecutar un programita
     }
 }
