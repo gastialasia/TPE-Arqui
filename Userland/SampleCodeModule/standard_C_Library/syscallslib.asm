@@ -4,6 +4,7 @@ GLOBAL sys_printMem
 GLOBAL sys_clear
 GLOBAL sys_date
 GLOBAL divzero
+GLOBAL opcode
 
 section .text
 
@@ -35,4 +36,8 @@ sys_date:
 divzero:
   xor rax, rax
   div rax
+  ret
+
+opcode:
+  ud2   ;undefined instruction, para tirar el opcode exception.
   ret

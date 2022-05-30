@@ -14,6 +14,7 @@ GLOBAL _irq04Handler
 GLOBAL _irq05Handler
 
 GLOBAL _exception0Handler
+GLOBAL _exception6Handler
 
 GLOBAL _syscallHandler
 EXTERN syscallsetter
@@ -91,7 +92,7 @@ SECTION .text
 	call inforeg
 	popState
 	pop rax ;rip esta "arriba"  en el stack
-	
+
 	call rebootTerm
 
 	mov rax,400000h; muevo el nuevo rip al principio de la shell
@@ -174,6 +175,10 @@ _irq05Handler:
 ;Zero Division Exception
 _exception0Handler:
 	exceptionHandler 0
+
+;Opcode Exception
+_exception6Handler:
+	exceptionHandler 6
 
 ;Software Interruption
 _syscallHandler:

@@ -25,6 +25,10 @@ void clear();
 
 void printdate();
 
+void divzero();
+
+void opcode();
+
 //uint64_t hex2int(char *hex, int *ok);
 
 #endif
