@@ -109,11 +109,6 @@ int main()
 
 	*/
 
-
-
-
-	//inforeg();
-
 	((EntryPoint)sampleCodeModuleAddress)();
 	return 0;
 }

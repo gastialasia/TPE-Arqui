@@ -9,5 +9,6 @@ int sys_read(int fd, char * buffer, size_t count);
 void sys_printMem(uint64_t pointer);
 void sys_clear();
 char sys_date(char value);
+void sys_sleep(int secs);
 
 #endif

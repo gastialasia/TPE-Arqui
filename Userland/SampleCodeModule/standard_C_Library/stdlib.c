@@ -20,15 +20,15 @@ void putchar(const char c){
 }
 
 void printf(const char * str) {
-    sys_write(STDIN, str, strlen(str)); 
+    sys_write(STDIN, str, strlen(str));
 }
 
 void printfLeft(const char * str) {
-    sys_write(LEFTSCREEN, str, strlen(str)); 
+    sys_write(LEFTSCREEN, str, strlen(str));
 }
 
 void printfRight(const char * str) {
-    sys_write(RIGHTSCREEN, str, strlen(str)); 
+    sys_write(RIGHTSCREEN, str, strlen(str));
 }
 
 uint32_t uintToBase(uint64_t value, char * buffer, uint32_t base)
@@ -70,6 +70,12 @@ void printInt(int num){
     sys_write(STDIN, buffer, len);
 }
 
+void printInt64(unsigned long num){
+    char buffer[20];
+    int len = uintToBase(num,buffer,10);
+    sys_write(STDIN, buffer, len);
+}
+
 char getchar(){
     char c;
     sys_read(STDIN,&c,1);
@@ -85,7 +91,7 @@ uint64_t hex2int(char *hex, int *ok) {
     while (*hex) {
         // get current character then increment
         uint8_t byte = *hex++;
-        
+
         if (!(byte >= '0' && byte <= '9') && !(byte >= 'a' && byte <= 'f') && !(byte >= 'A' && byte <= 'F')) {
           *ok = 0;
           return 0;
@@ -93,8 +99,8 @@ uint64_t hex2int(char *hex, int *ok) {
         // transform hex character to the 4bit equivalent number, using the ascii table indexes
         if (byte >= '0' && byte <= '9') byte = byte - '0';
         else if (byte >= 'a' && byte <='f') byte = byte - 'a' + 10;
-        else if (byte >= 'A' && byte <='F') byte = byte - 'A' + 10;    
-        // shift 4 to make space for new digit, and add the 4 bits of the new digit 
+        else if (byte >= 'A' && byte <='F') byte = byte - 'A' + 10;
+        // shift 4 to make space for new digit, and add the 4 bits of the new digit
         val = (val << 4) | (byte & 0xF);
     }
     return val;
@@ -139,4 +145,6 @@ int strcmp(const char *str1, const char *str2){
     return 1;
 }
 
-
+void sleep(int secs){
+    sys_sleep(secs);
+}

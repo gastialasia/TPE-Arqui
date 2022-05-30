@@ -2,6 +2,7 @@
 #include <keyboard.h>
 #include <interrupts.h>
 #include <syscalls.h>
+#include <time.h>
 #include <lib.h>
 
 #define STDIN 1
@@ -137,4 +138,8 @@ void inforeg(){
 	ncPrint("R15: ");
 	ncPrintDec(regs->r15);
 	ncNewline();
+}
+
+void sleep(int secs){
+	tSleep(secs);
 }

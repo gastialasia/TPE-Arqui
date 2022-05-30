@@ -1,4 +1,7 @@
 #include <time.h>
+#include <interrupts.h>
+
+#define TICKSPERSECOND 18
 
 static unsigned long ticks = 0;
 
@@ -11,5 +14,11 @@ int ticks_elapsed() {
 }
 
 int seconds_elapsed() {
-	return ticks / 18;
+	return ticks / TICKSPERSECOND;
+}
+
+void tSleep(int secs){
+	int final_ticks = ticks + secs*TICKSPERSECOND;
+	while(ticks <= final_ticks)
+		_hlt();
 }

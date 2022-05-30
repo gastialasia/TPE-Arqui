@@ -16,4 +16,6 @@ void inforeg();
 
 int64_t date(char value);
 
+void sleep(int secs);
+
 #endif

@@ -25,6 +25,8 @@ void clear();
 
 void printdate();
 
+void sleep(int secs);
+
 void divzero();
 
 void opcode();

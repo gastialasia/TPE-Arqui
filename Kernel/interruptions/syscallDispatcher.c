@@ -21,12 +21,16 @@ int64_t syscallDispatcher(int64_t arg0, int64_t arg1, int64_t arg2) {
         clear();
         return;
     case 4:
-	   return printMem((uint64_t) arg0);
+	   	printMem((uint64_t) arg0);
+		break;
     case 5:
         inforeg();
         break;
     case 6:
         return date((char)arg0);
+	case 7:
+		sleep((int)arg0);
+		break;
     default:
         return -1;
     }

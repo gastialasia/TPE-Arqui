@@ -3,6 +3,7 @@ GLOBAL sys_read
 GLOBAL sys_printMem
 GLOBAL sys_clear
 GLOBAL sys_date
+GLOBAL sys_sleep
 GLOBAL divzero
 GLOBAL opcode
 
@@ -30,6 +31,11 @@ sys_clear:
 
 sys_date:
     mov rax, 6
+    int 80h
+    ret
+
+sys_sleep:
+    mov rax, 7
     int 80h
     ret
 
