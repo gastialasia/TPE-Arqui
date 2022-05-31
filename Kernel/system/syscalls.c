@@ -13,7 +13,7 @@
 int64_t write(int fd, const char * buffer, size_t count){
 	switch(fd){
 		case STDIN:
-			//ncUnSplit();
+			ncUnSplit();
 			for(int i = 0; i < count; i++){
 				ncPrintChar(buffer[i]);
 			}

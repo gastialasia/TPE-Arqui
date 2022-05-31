@@ -51,7 +51,6 @@ void ncSplit(){
 }
 
 void ncUnSplit(){
-	ncClear();
 	currentVideoL=video;
 	currentVideoR=video;
 	split = 0;
