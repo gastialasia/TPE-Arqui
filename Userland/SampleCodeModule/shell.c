@@ -74,3 +74,29 @@ void simpleScreenWrapper(uint64_t(*fn)(void)){
     }
     printf("Program ended.\n");
 }
+
+void SplitScreenWrapper(uint64_t(*fn1)(void),uint64_t(*fn2)(void)){
+    uint64_t current1;
+    uint64_t current2;
+    int p1Running=1;
+    int p2Running=1;
+    while(p1Running&&p2Running){
+      current1 = fn1();
+      if (p1Running&&current1>LIMIT64){
+        p1Running=0;
+      }
+      current2 = fn2();
+      if (p2Running&&current2>LIMIT64){
+        p1Running=0;
+      }
+      if (!p1Ended){
+        printfL(current1);
+        printfL("\n");
+      }
+      if (!p2Ended){
+        printfR(current2);
+        printfR("\n");
+      }
+      sleep(1);
+    }
+}
