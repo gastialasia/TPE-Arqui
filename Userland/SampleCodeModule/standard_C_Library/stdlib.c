@@ -135,6 +135,10 @@ int strcpy(char *dest, const char *src){
     return i;
 }
 
+char getDateComponent(int value){
+    return sys_date(value);
+}
+
 void sleep(int secs){
     sys_sleep(secs);
 }

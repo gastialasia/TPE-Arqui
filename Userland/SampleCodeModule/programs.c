@@ -9,30 +9,35 @@ static uint64_t lastPrimo=1;
 
 char help(char*buff){
     char aux[]="Commands:\n-fibonacci\n-help\n-printmem\n-date\n-opcode";
-    int i;
-    for (i=0;aux[i];i++){
-        buff[i]=aux[i];
-    }
-    buff[i]=0;
+    strcpy(buff,aux);
+    printf(buff);
     return 0;
 }
 
 char date(char*buff){
     int values[5] = {7,8,9,4,2}; //En orden: D, M, Y, H, M
-    char buffer[2]; // Cada numero de la fecha no va a tener más de dos digitos
+    char buffer[3]; // Cada numero de la fecha no va a tener más de dos digitos, 3 contando el cero null terminated
     for (int i=0;i<5;i++){
-        char num = sys_date(values[i]);
+        char num = getDateComponent(values[i]);
         uintToBase(num,buffer,16);
-        printf(buffer);
+        if (num<0xA){
+            // Si el numero es de un solo digito, lo muevo un lugar a la derecha y a la izquierda le pongo un cero
+            char aux = buffer[0];
+            buffer[0]='0';
+            buffer[1]=aux;
+        }
+        buffer[2]=0; // Al string del numero le agrego un cero null terminated asi puedo usar strcpy
+        buff += strcpy(buff,buffer);
         if (i<2){
-            printf("/");
+            buff += strcpy(buff,"/");
         } else if (i==3){
-            printf(":");
+            buff += strcpy(buff,":");
         } else {
-            printf(" ");
+            buff += strcpy(buff," ");
         }
     }
-    printf("UTC\n");
+    strcpy(buff,"UTC\n");
+    return 0;
 }
 
 char fibo(char*buff){

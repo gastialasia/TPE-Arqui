@@ -3,6 +3,7 @@
 #include <programs.h>
 #define LENGTH 100
 #define MAXDIGITS 21
+#define MAXBUFFER 100
 
 void shell(void){
 
@@ -40,8 +41,7 @@ void parser(char * buffer){
     commands[j][k] = 0;
     if(flag == 0){
         if (strcmp(commands[0],"date")){
-            printf("La fecha actual es: ");
-            //printdate();
+            simpleScreenWrapper(date);
         }
     	else if (strcmp(commands[0],"divzero")) {
     		divzero();
@@ -59,30 +59,37 @@ void parser(char * buffer){
         else if(strcmp(commands[0],"primos")){
             simpleScreenWrapper(primos);
             reset_primo();
-        } else if(strcmp(commands[0],"split")){
-            SplitScreenWrapper(fibo,help);
+        }
+        else if(strcmp(commands[0],"help")){
+            simpleScreenWrapper(help);
+        }
+        else if(strcmp(commands[0],"split")){
+            SplitScreenWrapper(help,date);
             reset_primo();
             reset_fibo();
         }
         else
             printf("Invalid command: try 'help'\n");
+    } else {
+        // El flag es 1, entonces hay un pipe
     }
 }
 
 void simpleScreenWrapper(char(*fn)(char*)){
     char isRunning=1;
-    char buffer[21];
-    while(isRunning=fn(buffer)){
+    char buffer[MAXBUFFER];
+    while(isRunning){
+        isRunning = fn(buffer);
         printf(buffer);
         putchar('\n');
     }
-    printf("Program ended.\n");
+    //printf("Program ended\n");
 }
 
 void SplitScreenWrapper(char(*fn1)(char*),char(*fn2)(char*)){
     char isRunning1=1;
     char isRunning2=1;
-    char buffer[100];
+    char buffer[MAXBUFFER];
     while(isRunning1||isRunning2){
       if (isRunning1){
           isRunning1 = fn1(buffer);

@@ -33,6 +33,8 @@ void opcode();
 
 int strcpy(char *dest, const char *src);
 
+char getDateComponent(int value);
+
 //uint64_t hex2int(char *hex, int *ok);
 
 #endif
