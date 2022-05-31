@@ -31,6 +31,8 @@ void divzero();
 
 void opcode();
 
+int strcpy(char *dest, const char *src);
+
 //uint64_t hex2int(char *hex, int *ok);
 
 #endif

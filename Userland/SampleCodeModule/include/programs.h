@@ -1,9 +1,11 @@
 #ifndef _programs_
 #define _programs_
 
-uint64_t fibo();
+char fibo(char*buff);
 void reset_fibo();
-uint64_t primos();
+char primos(char * buff);
 void reset_primo();
+char help(char*buff);
+char date(char*buff);
 
 #endif

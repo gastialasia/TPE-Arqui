@@ -1,17 +1,51 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#define BIGGEST64INT 0xFFFFFFFFFFFFFFFF
+#define LIMIT64 0b0111111111111111111111111111111111111111111111111111111111111111 //2^(63)-1
 
 static uint64_t fibo1=0;
 static uint64_t fibo2=1;
 static uint64_t lastPrimo=1;
 
-uint64_t fibo(){
+char help(char*buff){
+    char aux[]="Commands:\n-fibonacci\n-help\n-printmem\n-date\n-opcode";
+    int i;
+    for (i=0;aux[i];i++){
+        buff[i]=aux[i];
+    }
+    buff[i]=0;
+    return 0;
+}
+
+char date(char*buff){
+    int values[5] = {7,8,9,4,2}; //En orden: D, M, Y, H, M
+    char buffer[2]; // Cada numero de la fecha no va a tener más de dos digitos
+    for (int i=0;i<5;i++){
+        char num = sys_date(values[i]);
+        uintToBase(num,buffer,16);
+        printf(buffer);
+        if (i<2){
+            printf("/");
+        } else if (i==3){
+            printf(":");
+        } else {
+            printf(" ");
+        }
+    }
+    printf("UTC\n");
+}
+
+char fibo(char*buff){
+    // Deja en el buffer el numero convertido a string
+    // Devuelve 1 si el programa sigue corriendo, 0 sino
     uint64_t aux = fibo1;
     fibo1 = fibo2;
     fibo2 = aux+fibo1;
-    return aux;
+    if (aux>LIMIT64){
+        return 0;
+    }
+    uintToBase(aux,buff,10);
+    return 1;
 }
 
 void reset_fibo(){
@@ -19,9 +53,11 @@ void reset_fibo(){
     fibo2=1;
 }
 
-uint64_t primos(){ //Esta funcion es una criba de Eratosthenes casera
+char primos(char * buff){ //Esta funcion es una criba de Eratosthenes casera
+  // deja en el buffer el numeor convertido a string
+  // devuelve 1 si el programa no termino, 0 si termino
     uint64_t j, limit;
-    for(uint64_t i=lastPrimo+1; i <= BIGGEST64INT; i++){
+    for(uint64_t i=lastPrimo+1; i <= LIMIT64; i++){
         limit = i/2;
         int isPrimo=1;
         for(j=2; j <= limit && isPrimo; j++){
@@ -30,7 +66,8 @@ uint64_t primos(){ //Esta funcion es una criba de Eratosthenes casera
         }
         if(isPrimo){
             lastPrimo = i;
-            return lastPrimo;
+            uintToBase(lastPrimo,buff,10);
+            return 1;
         }
     }
     return 0;

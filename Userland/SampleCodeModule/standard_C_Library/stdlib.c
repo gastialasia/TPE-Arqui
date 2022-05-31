@@ -110,26 +110,6 @@ void clear(){
     sys_clear();
 }
 
-
-void printdate(){
-    int values[5] = {7,8,9,4,2}; //En orden: D, M, Y, H, M
-    //char * separators[5] = {" "," "," "," "};
-    char buffer[2]; // Cada numero de la fecha no va a tener más de dos digitos
-    for (int i=0;i<5;i++){
-        char num = sys_date(values[i]);
-        uintToBase(num,buffer,16);
-        printf(buffer);
-        if (i<2){
-            printf("/");
-        } else if (i==3){
-            printf(":");
-        } else {
-            printf(" ");
-        }
-    }
-    printf("UTC\n");
-}
-
 // Devuelve 1 si son iguales, 0 sino
 int strcmp(const char *str1, const char *str2){
     int pos=0;
@@ -143,6 +123,16 @@ int strcmp(const char *str1, const char *str2){
         return 0;
     }
     return 1;
+}
+
+// Copia el string de src en dest, y devuelve la cant de caracteres que copio
+int strcpy(char *dest, const char *src){
+    int i;
+    for (i=0;src[i];i++){
+        dest[i]=src[i];
+    }
+    dest[i]=0;
+    return i;
 }
 
 void sleep(int secs){
