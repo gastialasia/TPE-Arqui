@@ -3,6 +3,6 @@
 
 void shell(void);
 void parser(char * buffer);
-void exec(char ** commands, int flag);
+void simpleScreenWrapper(uint64_t(*fn)(void));
 
 #endif

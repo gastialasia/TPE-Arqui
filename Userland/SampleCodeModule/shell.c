@@ -2,9 +2,10 @@
 #include <shell.h>
 #include <programs.h>
 #define LENGTH 100
+#define LIMIT64 0b0111111111111111111111111111111111111111111111111111111111111111 //2^(63)-1
 
 void shell(void){
-    
+
     //Pruebas:
     //printfLeft("Llamando a printfLeft: este texto deberia aparecer del lado izquierdo de la pantalla");
     //printfRight("Llamando a printfRight: este texto deberia aparecer del lado derecho de la pantalla puto el que lee");
@@ -52,7 +53,24 @@ void parser(char * buffer){
             opcode();
         }
         else if(strcmp(commands[0],"fibonacci")){
-            fibo();
+            simpleScreenWrapper(fibo);
+            reset_fibo();
         }
+        else if(strcmp(commands[0],"primos")){
+            simpleScreenWrapper(primos);
+            reset_primo();
+        }
+        else
+            printf("Invalid command: try 'help'\n");
     }
+}
+
+void simpleScreenWrapper(uint64_t(*fn)(void)){
+    uint64_t current;
+    while((current = fn()) < LIMIT64){
+        printInt64(current);
+        putchar('\n');
+        sleep(1);
+    }
+    printf("Program ended.\n");
 }
