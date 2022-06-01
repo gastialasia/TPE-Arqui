@@ -4,11 +4,14 @@
 #include <syscalls.h>
 #include <time.h>
 #include <lib.h>
+#include <tools.h>
 
 #define STDIN 1
 #define LEFTSCREEN 2
 #define RIGHTSCREEN 3
 #define DEFAULT_RETVALUE -1
+
+static char mayusc = 0;
 
 int64_t write(int fd, const char * buffer, size_t count){
 	switch(fd){
@@ -52,8 +55,18 @@ int64_t read(int fd, char * buffer, size_t count){
 					k--;
 					break;
 				}
+				case 14:
+				case 15:
+					mayusc = 1;
+					break;
+				case 170:
+				case 182:
+					mayusc = 0;
+					break;
 				default:
 				{
+					if(mayusc)
+						key = toMayusc(key);
 					ncPrintChar(key);
 					buffer[k++]=key;
 				}
