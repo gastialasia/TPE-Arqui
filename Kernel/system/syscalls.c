@@ -40,19 +40,21 @@ int64_t write(int fd, const char * buffer, size_t count){
 
 int64_t read(int fd, char * buffer, size_t count){
 	if(fd==STDIN){
-		_sti();
 		int k = 0;
 		unsigned char key = 0;
 
-		while(key!='\n'&&k<count){
+		while(key!='\n' && k<count){
+			_hlt();
 			key = readKey();
 			switch (key){
 				case 0:
 					break;
 				case 8: //Borrado
 				{
-					ncDeleteChar();
-					k--;
+					if(k > 0){
+						ncDeleteChar();
+						k--;
+					}
 					break;
 				}
 				case 14:
@@ -76,7 +78,6 @@ int64_t read(int fd, char * buffer, size_t count){
 			ncNewline();
 		}
 		buffer[k]=0;
-		_cli();
 		return k; //placeholder
 	}
 	return DEFAULT_RETVALUE;

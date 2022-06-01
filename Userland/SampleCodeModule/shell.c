@@ -24,7 +24,7 @@ void shell(void){
 
 void parser(char * buffer){
     int i = 0,j = 0, k = 0;
-    char commands[2][10];
+    char commands[2][100];
     int flag = 0;
     while(buffer[i] != 0){ //faltan chequeos
         if(buffer[i] != ' '){
