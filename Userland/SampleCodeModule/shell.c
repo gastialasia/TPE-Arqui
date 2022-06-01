@@ -5,11 +5,9 @@
 #define MAXDIGITS 21
 #define MAXBUFFER 100
 
+
 void shell(void){
 
-    //Pruebas:
-    //printfLeft("Llamando a printfLeft: este texto deberia aparecer del lado izquierdo de la pantalla");
-    //printfRight("Llamando a printfRight: este texto deberia aparecer del lado derecho de la pantalla puto el que lee");
     char buffer[LENGTH];
     while(1){
         printf("User:$ ");
@@ -18,61 +16,61 @@ void shell(void){
         parser(buffer);
         //Acá va el procesamiento de lo que recibio la funcion para ejecutar un programita
     }
-
-
 }
 
 void parser(char * buffer){
     int i = 0,j = 0, k = 0;
-    char commands[2][10];
+    char commands[2][100];
     int flag = 0;
     while(buffer[i] != 0){ //faltan chequeos
-        if(buffer[i] != ' '){
-            commands[j][k++] = buffer[i];
-        }
-        else if(buffer[i] == '|'){
+        if(buffer[i] == '|'){
             commands[j][k] = 0;
             j++;
             k = 0;
             flag = 1;
+        } else if(buffer[i] != ' '){
+            commands[j][k++] = buffer[i];
         }
+
         i++;
     }
     commands[j][k] = 0;
     if(flag == 0){
-        if (strcmp(commands[0],"date")){
-            simpleScreenWrapper(date);
+        if (strcmp(commands[0],"divzero")){
+            divzero();
         }
-    	else if (strcmp(commands[0],"divzero")) {
-    		divzero();
+    	else if (strcmp(commands[0],"clear")) {
+    		clear();
     	}
-        else if (strcmp(commands[0],"clear")){
-            clear();
-        }
         else if(strcmp(commands[0],"opcode")){
             opcode();
         }
-        else if(strcmp(commands[0],"fibonacci")){
-            simpleScreenWrapper(fibo);
-            reset_fibo();
+        else{
+            simpleScreenWrapper(getFuncFromString(commands[0]));
         }
-        else if(strcmp(commands[0],"primos")){
-            simpleScreenWrapper(primos);
-            reset_primo();
-        }
-        else if(strcmp(commands[0],"help")){
-            simpleScreenWrapper(help);
-        }
-        else if(strcmp(commands[0],"split")){
-            SplitScreenWrapper(help,date);
-            reset_primo();
-            reset_fibo();
-        }
-        else
-            printf("Invalid command: try 'help'\n");
-    } else {
+
+    } else if (flag==1) {
         // El flag es 1, entonces hay un pipe
+        uint64_t prog1 = getFuncFromString(commands[0]);
+        uint64_t prog2 = getFuncFromString(commands[1]);
+        SplitScreenWrapper(prog1,prog2);
     }
+}
+
+uint64_t getFuncFromString(char*str){
+    uint64_t toRet;
+    if (strcmp("date",str)){
+        toRet = &date;
+    } else if (strcmp("help",str)){
+        toRet = &help;
+    } else if (strcmp("fibonacci",str)){
+        toRet = &fibo;
+    } else if (strcmp("primos",str)){
+        toRet = &primos;
+    } else{
+        toRet =&invalid;
+    }
+    return toRet;
 }
 
 void simpleScreenWrapper(char(*fn)(char*)){

@@ -7,5 +7,6 @@ char primos(char * buff);
 void reset_primo();
 char help(char*buff);
 char date(char*buff);
+char invalid(char*buff);
 
 #endif

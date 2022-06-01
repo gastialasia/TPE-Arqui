@@ -10,7 +10,12 @@ static uint64_t lastPrimo=1;
 char help(char*buff){
     char aux[]="Commands:\n-fibonacci\n-help\n-printmem\n-date\n-opcode";
     strcpy(buff,aux);
-    printf(buff);
+    return 0;
+}
+
+char invalid(char*buff){
+    char aux[]="Invalid command: try 'help'\n";
+    strcpy(buff,aux);
     return 0;
 }
 
