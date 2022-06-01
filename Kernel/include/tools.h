@@ -3,5 +3,6 @@
 
 char isAlpha(char c);
 char toMayusc(char c);
+char isPipe(char c);
 
 #endif
