@@ -74,10 +74,11 @@ uint64_t getFuncFromString(char*str){
 }
 
 void simpleScreenWrapper(char(*fn)(char*)){
-    char isRunning=1;
     char buffer[MAXBUFFER];
-    while(isRunning){
-        isRunning = fn(buffer);
+    char isRunning=fn(buffer);
+    printf(buffer);
+    putchar('\n');
+    while(isRunning = fn(buffer)){
         printf(buffer);
         putchar('\n');
     }

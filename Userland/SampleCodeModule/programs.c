@@ -14,7 +14,7 @@ char help(char*buff){
 }
 
 char invalid(char*buff){
-    char aux[]="Invalid command: try 'help'\n";
+    char aux[]="Invalid command: try 'help'";
     strcpy(buff,aux);
     return 0;
 }
@@ -41,7 +41,7 @@ char date(char*buff){
             buff += strcpy(buff," ");
         }
     }
-    strcpy(buff,"UTC\n");
+    strcpy(buff,"UTC");
     return 0;
 }
 
