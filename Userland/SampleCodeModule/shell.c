@@ -72,11 +72,7 @@ uint64_t getFuncFromString(char*str){
     return toRet;
 }
 
-<<<<<<< Updated upstream
 void simpleScreenWrapper(char(*fn)(char*)){
-=======
-void simpleScreenWrapper(char(fn)(char)){
->>>>>>> Stashed changes
     char buffer[MAXBUFFER];
     char isRunning=fn(buffer);
     printf(buffer);
