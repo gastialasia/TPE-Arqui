@@ -3,7 +3,12 @@
 
 #include <stdint.h>
 #include <stddef.h>
-
+#include <naiveConsole.h>
+#include <keyboard.h>
+#include <interrupts.h>
+#include <time.h>
+#include <lib.h>
+#include <tools.h>
 
 int64_t write(int fd, const char * buffer, size_t count);
 

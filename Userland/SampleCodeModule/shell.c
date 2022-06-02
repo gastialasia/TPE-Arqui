@@ -1,16 +1,15 @@
 #include <stdlib.h>
 #include <shell.h>
 #include <programs.h>
+#include <stdint.h>
 #define LENGTH 100
 #define MAXDIGITS 21
 #define MAXBUFFER 100
-
 
 void shell(void){
 
     setScreenMode(1);
     char buffer[LENGTH];
-    printf(buffer);
     while(1){
         printf("User:$ ");
         int length = scanf(buffer);
@@ -91,15 +90,15 @@ void SplitScreenWrapper(char(*fn1)(char*),char(*fn2)(char*)){
     while(isRunning1||isRunning2){
         sleep(1);
       if (isRunning1){
-          isRunning1 = fn1(buffer);
           setScreenMode(2);
+          isRunning1 = fn1(buffer);
           printf(buffer);
           printf("\n");
           // Hay que chequear porque entra una vez mas de las que deberia
       }
       if (isRunning2){
-          isRunning2 = fn2(buffer);
           setScreenMode(3);
+          isRunning2 = fn2(buffer);
           printf(buffer);
           printf("\n");
           // Idem anterior

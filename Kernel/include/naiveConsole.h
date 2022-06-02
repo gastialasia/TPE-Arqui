@@ -3,6 +3,10 @@
 
 #include <stdint.h>
 
+
+void ncPrintL(const char * string);
+void ncPrintR(const char * string);
+
 void ncPrint(const char * string);
 void ncPrintChar(char character);
 void ncPrintCharR(char character);

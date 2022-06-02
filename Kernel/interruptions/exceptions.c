@@ -1,8 +1,13 @@
 #include <naiveConsole.h>
+#include <syscalls.h>
 #include "../include/keyboard.h"
 
 #define ZERO_EXCEPTION_ID 0
 #define OPCODE_EXCEPTION_ID 6
+
+extern void (*printCharPtr)(char*);
+extern void (*printPtr)(char*);
+extern void (*printHexPtr)(char*);
 
 static void zero_division();
 static void opcode();
@@ -15,11 +20,11 @@ void exceptionDispatcher(int exception) {
 }
 
 static void zero_division() {
-	write(1,"ZERO DIVISION ERROR!\n",23);
+	printPtr("ZERO DIVISION ERROR!\n");
 }
 
 static void opcode(){
-	write(1,"OPCODE EXCEPTION!\n",20);
+	printPtr("OPCODE EXCEPTION!\n");
 }
 
 void rebootTerm(){
