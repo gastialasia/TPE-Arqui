@@ -15,25 +15,20 @@ void exceptionDispatcher(int exception) {
 }
 
 static void zero_division() {
-	ncPrint("ZERO DIVISION ERROR!\n");
+	write(1,"ZERO DIVISION ERROR!\n",23);
 }
 
 static void opcode(){
-	ncPrint("OPCODE EXCEPTION!\n");
+	write(1,"OPCODE EXCEPTION!\n",20);
 }
+
 void rebootTerm(){
 
-	ncPrint("Presione cualquier tecla para volver a la shell");
+	sleep(5);
 
-	while(1){
-	_hlt();
+	write(1,"Presione cualquier tecla para volver a la shell",48);
 
-	unsigned char key = readKey();
-	if(key != 0){
-		break;
-	}
 
-	}
-	ncClear();
 
+	//ncClear();
 }

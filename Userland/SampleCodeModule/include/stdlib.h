@@ -11,9 +11,9 @@ void putchar(const char c);
 
 void printf(const char *);
 
-void printfLeft(const char *);
+//void printfLeft(const char *);
 
-void printfRight(const char *);
+//void printfRight(const char *);
 
 void printInt(int num);
 
@@ -34,6 +34,8 @@ void opcode();
 int strcpy(char *dest, const char *src);
 
 char getDateComponent(int value);
+
+void setScreenMode(int mode);
 
 //uint64_t hex2int(char *hex, int *ok);
 

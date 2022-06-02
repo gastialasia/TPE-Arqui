@@ -4,6 +4,7 @@ GLOBAL sys_printMem
 GLOBAL sys_clear
 GLOBAL sys_date
 GLOBAL sys_sleep
+GLOBAL sys_setScreen
 GLOBAL divzero
 GLOBAL opcode
 
@@ -38,6 +39,11 @@ sys_sleep:
     mov rax, 7
     int 80h
     ret
+
+sys_setScreen:
+        mov rax, 8
+        int 80h
+        ret
 
 divzero:
   xor rax, rax

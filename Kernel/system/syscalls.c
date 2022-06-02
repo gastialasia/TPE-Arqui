@@ -12,9 +12,10 @@
 #define DEFAULT_RETVALUE -1
 
 static char mayusc = 0;
+static int screenMode = 1;
 
 int64_t write(int fd, const char * buffer, size_t count){
-	switch(fd){
+	switch(screenMode){
 		case STDIN:
 			ncUnSplit();
 			for(int i = 0; i < count; i++){
@@ -156,4 +157,8 @@ void inforeg(){
 
 void sleep(int secs){
 	tSleep(secs);
+}
+
+void setScreenMode(int mode){
+	screenMode = mode;
 }

@@ -10,5 +10,6 @@ void sys_printMem(uint64_t pointer);
 void sys_clear();
 char sys_date(char value);
 void sys_sleep(int secs);
+void sys_setScreen(int mode);
 
 #endif

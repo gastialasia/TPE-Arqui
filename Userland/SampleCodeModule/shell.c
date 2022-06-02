@@ -8,7 +8,9 @@
 
 void shell(void){
 
+    setScreenMode(1);
     char buffer[LENGTH];
+    printf(buffer);
     while(1){
         printf("User:$ ");
         int length = scanf(buffer);
@@ -36,20 +38,8 @@ void parser(char * buffer){
     }
     commands[j][k] = 0;
     if(flag == 0){
-        if (strcmp(commands[0],"divzero")){
-            divzero();
-        }
-    	else if (strcmp(commands[0],"clear")) {
-    		clear();
-    	}
-        else if(strcmp(commands[0],"opcode")){
-            opcode();
-        }
-        else{
-            simpleScreenWrapper(getFuncFromString(commands[0]));
-        }
-
-    } else if (flag==1) {
+        simpleScreenWrapper(getFuncFromString(commands[0]));
+    }  else {
         // El flag es 1, entonces hay un pipe
         uint64_t prog1 = getFuncFromString(commands[0]);
         uint64_t prog2 = getFuncFromString(commands[1]);
@@ -67,13 +57,26 @@ uint64_t getFuncFromString(char*str){
         toRet = &fibo;
     } else if (strcmp("primos",str)){
         toRet = &primos;
+    } else if (strcmp("opcode",str)){
+        toRet = &opcode;
+    } else if (strcmp("divzero",str)){
+        toRet = &divzero;
+    } else if (strcmp("clear",str)){
+        toRet = &clear;
+    } else if (strcmp("printmem",str)){
+        toRet =&invalid;
+        //toRet = &printmem;
     } else{
         toRet =&invalid;
     }
     return toRet;
 }
 
+<<<<<<< Updated upstream
 void simpleScreenWrapper(char(*fn)(char*)){
+=======
+void simpleScreenWrapper(char(fn)(char)){
+>>>>>>> Stashed changes
     char buffer[MAXBUFFER];
     char isRunning=fn(buffer);
     printf(buffer);
@@ -90,16 +93,19 @@ void SplitScreenWrapper(char(*fn1)(char*),char(*fn2)(char*)){
     char isRunning2=1;
     char buffer[MAXBUFFER];
     while(isRunning1||isRunning2){
+        sleep(1);
       if (isRunning1){
           isRunning1 = fn1(buffer);
-          printfLeft(buffer);
-          printfLeft("\n");
+          setScreenMode(2);
+          printf(buffer);
+          printf("\n");
           // Hay que chequear porque entra una vez mas de las que deberia
       }
       if (isRunning2){
           isRunning2 = fn2(buffer);
-          printfRight(buffer);
-          printfRight("\n");
+          setScreenMode(3);
+          printf(buffer);
+          printf("\n");
           // Idem anterior
       }
       //sleep(1);

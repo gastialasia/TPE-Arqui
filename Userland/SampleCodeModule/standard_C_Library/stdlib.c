@@ -23,13 +23,13 @@ void printf(const char * str) {
     sys_write(STDIN, str, strlen(str));
 }
 
-void printfLeft(const char * str) {
+/*void printfLeft(const char * str) {
     sys_write(LEFTSCREEN, str, strlen(str));
-}
+}*/
 
-void printfRight(const char * str) {
+/*void printfRight(const char * str) {
     sys_write(RIGHTSCREEN, str, strlen(str));
-}
+}*/
 
 uint32_t uintToBase(uint64_t value, char * buffer, uint32_t base)
 {
@@ -141,4 +141,8 @@ char getDateComponent(int value){
 
 void sleep(int secs){
     sys_sleep(secs);
+}
+
+void setScreenMode(int code){
+    sys_setScreen(code);
 }

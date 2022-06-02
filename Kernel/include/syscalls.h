@@ -5,7 +5,6 @@
 #include <stddef.h>
 
 
-
 int64_t write(int fd, const char * buffer, size_t count);
 
 int64_t read(int fd, char * buffer, size_t count);
@@ -17,5 +16,7 @@ void inforeg();
 int64_t date(char value);
 
 void sleep(int secs);
+
+void setScreenMode(int mode);
 
 #endif

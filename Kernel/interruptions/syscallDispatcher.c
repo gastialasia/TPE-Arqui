@@ -31,6 +31,9 @@ int64_t syscallDispatcher(int64_t arg0, int64_t arg1, int64_t arg2) {
 	case 7:
 		sleep((int)arg0);
 		break;
+	case 8:
+		setScreenMode((int)arg0);
+		break;
     default:
         return -1;
     }
