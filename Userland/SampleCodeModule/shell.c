@@ -40,14 +40,14 @@ void parser(char * buffer){
         simpleScreenWrapper(getFuncFromString(commands[0]));
     }  else {
         // El flag es 1, entonces hay un pipe
-        uint64_t prog1 = getFuncFromString(commands[0]);
-        uint64_t prog2 = getFuncFromString(commands[1]);
+        function_type prog1 = getFuncFromString(commands[0]);
+        function_type prog2 = getFuncFromString(commands[1]);
         SplitScreenWrapper(prog1,prog2);
     }
 }
 
-uint64_t getFuncFromString(char*str){
-    uint64_t toRet;
+function_type getFuncFromString(char*str){
+    function_type toRet;
     if (strcmp("date",str)){
         toRet = &date;
     } else if (strcmp("help",str)){
@@ -76,7 +76,7 @@ uint64_t getFuncFromString(char*str){
 void simpleScreenWrapper(char(*fn)(void)){
     //char buffer[MAXBUFFER];
     char isRunning=fn();
-    
+
     //printf(buffer);
     while(isRunning){
         //printf(buffer);
