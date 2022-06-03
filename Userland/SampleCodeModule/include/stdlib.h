@@ -11,9 +11,7 @@ void putchar(const char c);
 
 void printf(const char *);
 
-//void printfLeft(const char *);
-
-//void printfRight(const char *);
+void inforeg(void);
 
 void printInt(int num);
 

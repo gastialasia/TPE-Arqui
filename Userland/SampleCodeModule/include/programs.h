@@ -8,5 +8,6 @@ void reset_primo();
 char help(char*buff);
 char date(char*buff);
 char invalid(char*buff);
+char infoRegisters();
 
 #endif

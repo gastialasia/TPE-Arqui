@@ -62,6 +62,8 @@ uint64_t getFuncFromString(char*str){
         toRet = &divzero;
     } else if (strcmp("clear",str)){
         toRet = &clear;
+    } else if (strcmp("inforeg",str)){
+        toRet = &infoRegisters;
     } else if (strcmp("printmem",str)){
         toRet =&invalid;
         //toRet = &printmem;
@@ -74,6 +76,7 @@ uint64_t getFuncFromString(char*str){
 void simpleScreenWrapper(char(*fn)(char*)){
     char buffer[MAXBUFFER];
     char isRunning=fn(buffer);
+    
     printf(buffer);
     putchar('\n');
     while(isRunning = fn(buffer)){

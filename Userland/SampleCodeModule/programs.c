@@ -86,3 +86,8 @@ char primos(char * buff){ //Esta funcion es una criba de Eratosthenes casera
 void reset_primo(){
     lastPrimo=1;
 }
+
+char infoRegisters(){
+    inforeg();
+    return 0;
+}

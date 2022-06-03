@@ -5,6 +5,7 @@ GLOBAL sys_clear
 GLOBAL sys_date
 GLOBAL sys_sleep
 GLOBAL sys_setScreen
+GLOBAL sys_inforeg
 GLOBAL divzero
 GLOBAL opcode
 
@@ -44,6 +45,11 @@ sys_setScreen:
         mov rax, 8
         int 80h
         ret
+
+sys_inforeg:
+    mov rax, 5
+    int 80h
+    ret
 
 divzero:
   xor rax, rax

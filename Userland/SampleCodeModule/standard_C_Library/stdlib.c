@@ -23,13 +23,9 @@ void printf(const char * str) {
     sys_write(STDIN, str, strlen(str));
 }
 
-/*void printfLeft(const char * str) {
-    sys_write(LEFTSCREEN, str, strlen(str));
-}*/
-
-/*void printfRight(const char * str) {
-    sys_write(RIGHTSCREEN, str, strlen(str));
-}*/
+void inforeg(void){
+    sys_inforeg();
+}
 
 uint32_t uintToBase(uint64_t value, char * buffer, uint32_t base)
 {

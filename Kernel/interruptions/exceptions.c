@@ -1,6 +1,4 @@
-#include <naiveConsole.h>
 #include <syscalls.h>
-#include "../include/keyboard.h"
 
 #define ZERO_EXCEPTION_ID 0
 #define OPCODE_EXCEPTION_ID 6
