@@ -32,17 +32,16 @@ char date(void){
             buffer[1]=aux;
         }
         buffer[2]=0; // Al string del numero le agrego un cero null terminated asi puedo usar strcpy
-        //buff += strcpy(buff,buffer);
+        printf(buffer);
         if (i<2){
-            //buff += strcpy(buff,"/");
+            printf("/");
         } else if (i==3){
-            //buff += strcpy(buff,":");
+            printf(":");
         } else {
-            //buff += strcpy(buff," ");
+            printf(" ");
         }
     }
-    //strcpy(buff,"UTC");
-    //printf(buff);
+    printf("UTC\n");
     return 0;
 }
 
