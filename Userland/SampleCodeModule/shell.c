@@ -73,39 +73,38 @@ uint64_t getFuncFromString(char*str){
     return toRet;
 }
 
-void simpleScreenWrapper(char(*fn)(char*)){
-    char buffer[MAXBUFFER];
-    char isRunning=fn(buffer);
+void simpleScreenWrapper(char(*fn)(void)){
+    //char buffer[MAXBUFFER];
+    char isRunning=fn();
     
-    printf(buffer);
-    putchar('\n');
-    while(isRunning = fn(buffer)){
-        printf(buffer);
+    //printf(buffer);
+    while(isRunning){
+        //printf(buffer);
         putchar('\n');
+        isRunning = fn();
     }
     //printf("Program ended\n");
 }
 
-void SplitScreenWrapper(char(*fn1)(char*),char(*fn2)(char*)){
+void SplitScreenWrapper(char(*fn1)(void),char(*fn2)(void)){
     char isRunning1=1;
     char isRunning2=1;
-    char buffer[MAXBUFFER];
     while(isRunning1||isRunning2){
-        sleep(1);
+        //sleep(1);
       if (isRunning1){
           setScreenMode(2);
-          isRunning1 = fn1(buffer);
-          printf(buffer);
           printf("\n");
+          isRunning1 = fn1();
           // Hay que chequear porque entra una vez mas de las que deberia
       }
       if (isRunning2){
           setScreenMode(3);
-          isRunning2 = fn2(buffer);
-          printf(buffer);
           printf("\n");
+          isRunning2 = fn2();
           // Idem anterior
       }
       //sleep(1);
     }
+    //Completar con esperar la tecla
+    setScreenMode(1);
 }

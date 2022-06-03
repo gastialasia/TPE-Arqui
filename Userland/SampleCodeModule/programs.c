@@ -7,19 +7,19 @@ static uint64_t fibo1=0;
 static uint64_t fibo2=1;
 static uint64_t lastPrimo=1;
 
-char help(char*buff){
-    char aux[]="Commands:\n-fibonacci\n-help\n-printmem\n-date\n-opcode";
-    strcpy(buff,aux);
+static char buff[300];
+
+char help(void){
+    printf("Commands:\n-fibonacci\n-help\n-printmem\n-date\n-opcode\n");
     return 0;
 }
 
-char invalid(char*buff){
-    char aux[]="Invalid command: try 'help'";
-    strcpy(buff,aux);
+char invalid(void){
+    printf("Invalid command: try 'help'\n");
     return 0;
 }
 
-char date(char*buff){
+char date(void){
     int values[5] = {7,8,9,4,2}; //En orden: D, M, Y, H, M
     char buffer[3]; // Cada numero de la fecha no va a tener más de dos digitos, 3 contando el cero null terminated
     for (int i=0;i<5;i++){
@@ -32,20 +32,21 @@ char date(char*buff){
             buffer[1]=aux;
         }
         buffer[2]=0; // Al string del numero le agrego un cero null terminated asi puedo usar strcpy
-        buff += strcpy(buff,buffer);
+        //buff += strcpy(buff,buffer);
         if (i<2){
-            buff += strcpy(buff,"/");
+            //buff += strcpy(buff,"/");
         } else if (i==3){
-            buff += strcpy(buff,":");
+            //buff += strcpy(buff,":");
         } else {
-            buff += strcpy(buff," ");
+            //buff += strcpy(buff," ");
         }
     }
-    strcpy(buff,"UTC");
+    //strcpy(buff,"UTC");
+    //printf(buff);
     return 0;
 }
 
-char fibo(char*buff){
+char fibo(void){
     // Deja en el buffer el numero convertido a string
     // Devuelve 1 si el programa sigue corriendo, 0 sino
     uint64_t aux = fibo1;
@@ -55,6 +56,7 @@ char fibo(char*buff){
         return 0;
     }
     uintToBase(aux,buff,10);
+    printf(buff);
     return 1;
 }
 
@@ -63,7 +65,7 @@ void reset_fibo(){
     fibo2=1;
 }
 
-char primos(char * buff){ //Esta funcion es una criba de Eratosthenes casera
+char primos(void){ //Esta funcion es una criba de Eratosthenes casera
   // deja en el buffer el numeor convertido a string
   // devuelve 1 si el programa no termino, 0 si termino
     uint64_t j, limit;
@@ -77,6 +79,7 @@ char primos(char * buff){ //Esta funcion es una criba de Eratosthenes casera
         if(isPrimo){
             lastPrimo = i;
             uintToBase(lastPrimo,buff,10);
+            printf(buff);
             return 1;
         }
     }
