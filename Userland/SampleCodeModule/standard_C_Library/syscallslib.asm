@@ -8,6 +8,8 @@ GLOBAL sys_setScreen
 GLOBAL sys_inforeg
 GLOBAL divzero
 GLOBAL opcode
+GLOBAL sys_storeProgram
+GLOBAL sys_getProgram
 
 section .text
 
@@ -42,18 +44,29 @@ sys_sleep:
     ret
 
 sys_setScreen:
-        mov rax, 8
-        int 80h
-        ret
+    mov rax, 8
+    int 80h
+    ret
 
 sys_inforeg:
     mov rax, 5
     int 80h
     ret
 
+sys_storeProgram:
+    mov rax, 10
+    int 80h
+    ret
+
+sys_getProgram:
+    mov rax, 11
+    int 80h
+    ret
+
 divzero:
-  xor rax, rax
-  div rax
+  mov rax, 4
+  xor rbx, rbx
+  div rbx
   ret
 
 opcode:

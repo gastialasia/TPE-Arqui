@@ -6,9 +6,22 @@
 #define MAXDIGITS 21
 #define MAXBUFFER 100
 
+static char command1[MAXBUFFER];
+static char command2[MAXBUFFER];
+
 void shell(void){
 
-    setScreenMode(1);
+    //Chequeo si había un programa corriendo antes
+
+    char * prevCommand1 = getProgram(0);
+    char * prevCommand2 = getProgram(1);
+
+    if (prevCommand1||prevCommand2){
+        function_type prog1 = getFuncFromString(prevCommand1);
+        function_type prog2 = getFuncFromString(prevCommand2);
+        SplitScreenWrapper(prog1,prog2);
+    }
+
     char buffer[LENGTH];
     while(1){
         printf("User:$ ");
@@ -37,9 +50,13 @@ void parser(char * buffer){
     }
     commands[j][k] = 0;
     if(flag == 0){
+        // No hay pipe
         simpleScreenWrapper(getFuncFromString(commands[0]));
     }  else {
         // El flag es 1, entonces hay un pipe
+        storeProgram(commands[0],commands[1]);
+        strcpy(command1,commands[0]);
+        strcpy(command2,commands[1]);
         function_type prog1 = getFuncFromString(commands[0]);
         function_type prog2 = getFuncFromString(commands[1]);
         SplitScreenWrapper(prog1,prog2);
@@ -67,6 +84,8 @@ function_type getFuncFromString(char*str){
     } else if (strcmp("printmem",str)){
         toRet =&invalid;
         //toRet = &printmem;
+    } else if (strlen(str)==0||strcmp("null",str)){
+        toRet = &nullProgram;
     } else{
         toRet =&invalid;
     }
@@ -76,12 +95,14 @@ function_type getFuncFromString(char*str){
 void simpleScreenWrapper(char(*fn)(void)){
     //char buffer[MAXBUFFER];
     char isRunning=fn();
-
+    putchar('\n');
+    sleep(1);
     //printf(buffer);
     while(isRunning){
         //printf(buffer);
-        putchar('\n');
         isRunning = fn();
+        putchar('\n');
+        sleep(1);
     }
     //printf("Program ended\n");
 }
@@ -90,21 +111,29 @@ void SplitScreenWrapper(char(*fn1)(void),char(*fn2)(void)){
     char isRunning1=1;
     char isRunning2=1;
     while(isRunning1||isRunning2){
-        //sleep(1);
+        sleep(1);
       if (isRunning1){
           setScreenMode(2);
-          printf("\n");
           isRunning1 = fn1();
+          //printInt(isRunning1);
+          if (isRunning1 == 0){
+              storeProgram("null",command2); // En caso de ya haber terminado el programa, lo borramos de los comandos guardados en el kernel
+          }
+          putchar('\n');
           // Hay que chequear porque entra una vez mas de las que deberia
       }
       if (isRunning2){
           setScreenMode(3);
-          printf("\n");
           isRunning2 = fn2();
+          putchar('\n');
           // Idem anterior
       }
       //sleep(1);
     }
+    while(1){
+
+    }
     //Completar con esperar la tecla
+    storeProgram(0,0);
     setScreenMode(1);
 }

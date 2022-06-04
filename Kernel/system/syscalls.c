@@ -6,6 +6,18 @@
 #define DEFAULT_RETVALUE -1
 
 static char mayusc = 0;
+static char screenMode = 1;
+static char * runningPrograms[2] = {0,0};
+
+char * getScreenModePtr(){
+	return &screenMode;
+}
+
+char ** getRunningProgramPtr(int index){
+	return &runningPrograms[index];
+}
+//runningPrograms = opcode, date
+//Screen mode 2
 
 void (*printCharPtr)(char*) = ncPrintChar;
 void (*printPtr)(char*) = ncPrint;
@@ -98,7 +110,7 @@ void inforeg()
 	printPtr("RAX: ");
 	printHexPtr(regs->rax);
 	printCharPtr('\n');
-	
+
 	printPtr("RBX: ");
 	printHexPtr(regs->rbx);
 	printCharPtr('\n');
@@ -106,55 +118,55 @@ void inforeg()
 	printPtr("RCX: ");
 	printHexPtr(regs->rcx);
 	printCharPtr('\n');
-	
+
 	printPtr("RDX: ");
 	printHexPtr(regs->rdx);
 	printCharPtr('\n');
-	
+
 	printPtr("RDI: ");
 	printHexPtr(regs->rdi);
 	printCharPtr('\n');
-	
+
 	printPtr("RSI: ");
 	printHexPtr(regs->rsi);
 	printCharPtr('\n');
-	
+
 	printPtr("RBP: ");
 	printHexPtr(regs->rbp);
 	printCharPtr('\n');
-	
+
 	printPtr("RSP: ");
 	printHexPtr(regs->rsp);
 	printCharPtr('\n');
-	
+
 	printPtr("R8: ");
 	printHexPtr(regs->r8);
 	printCharPtr('\n');
-	
+
 	printPtr("R9: ");
 	printHexPtr(regs->r9);
 	printCharPtr('\n');
-	
+
 	printPtr("R10: ");
 	printHexPtr(regs->r10);
 	printCharPtr('\n');
-	
+
 	printPtr("R11: ");
 	printHexPtr(regs->r11);
 	printCharPtr('\n');
-	
+
 	printPtr("R12: ");
 	printHexPtr(regs->r12);
 	printCharPtr('\n');
-	
+
 	printPtr("R13: ");
 	printHexPtr(regs->r13);
 	printCharPtr('\n');
-	
+
 	printPtr("R14: ");
 	printHexPtr(regs->r14);
 	printCharPtr('\n');
-	
+
 	printPtr("R15: ");
 	printHexPtr(regs->r15);
 	printCharPtr('\n');
@@ -167,6 +179,7 @@ void sleep(int secs)
 
 void setScreenMode(int mode)
 {
+	screenMode = mode;
 	switch (mode)
 	{
 	case 2:
@@ -187,4 +200,19 @@ void setScreenMode(int mode)
 		printPtr = ncPrint;
 		printHexPtr = ncPrintHex;
 	}
+}
+
+void storeProgram(char*p1, char*p2){
+	runningPrograms[0] = p1;
+	runningPrograms[1] = p2;
+}
+
+char * getProgram(char id){
+	if (id>1||id<0){
+		return 0;
+	}
+	//ncPrint("Getting program: ");
+	//ncPrint(runningPrograms[id]);
+	//ncPrint("\n");
+	return runningPrograms[id];
 }

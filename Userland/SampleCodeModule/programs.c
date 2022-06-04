@@ -93,3 +93,7 @@ char infoRegisters(){
     inforeg();
     return 0;
 }
+
+char nullProgram(){
+    return 0;
+}

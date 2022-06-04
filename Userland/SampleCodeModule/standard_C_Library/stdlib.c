@@ -142,3 +142,11 @@ void sleep(int secs){
 void setScreenMode(int code){
     sys_setScreen(code);
 }
+
+void storeProgram(char*p1, char*p2){
+    sys_storeProgram(p1,p2);
+}
+
+char * getProgram(char id){
+    return sys_getProgram(id);
+}

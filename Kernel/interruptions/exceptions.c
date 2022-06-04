@@ -6,6 +6,11 @@
 extern void (*printCharPtr)(char*);
 extern void (*printPtr)(char*);
 extern void (*printHexPtr)(char*);
+extern char * getScreenModePtr();
+extern char ** getRunningProgramPtr(int index);
+
+void killRunningProgram();
+
 
 static void zero_division();
 static void opcode();
@@ -19,17 +24,26 @@ void exceptionDispatcher(int exception) {
 
 static void zero_division() {
 	printPtr("ZERO DIVISION ERROR!\n");
+	killRunningProgram();
 }
 
 static void opcode(){
 	printPtr("OPCODE EXCEPTION!\n");
+	killRunningProgram();
+}
+
+void killRunningProgram(){
+	char screenMode = *getScreenModePtr();
+	if (screenMode>=2) {
+		**getRunningProgramPtr(screenMode-2)=0; // Le pongo un null terminated en el primer caracter para "arruinar el string"
+	}
 }
 
 void rebootTerm(){
 
-	sleep(5);
+	//sleep(5);
 
-	write(1,"Presione cualquier tecla para volver a la shell",48);
+	//write(1,"Presione cualquier tecla para volver a la shell",48);
 
 
 

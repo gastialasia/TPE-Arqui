@@ -10,7 +10,7 @@ char * v = (char*)0xB8000 + 79 * 2;
 
 int main() {
 	/*
-	//All the following code may be removed 
+	//All the following code may be removed
 	*v = 'X';
 	*(v+1) = 0x74;
 
@@ -20,7 +20,7 @@ int main() {
 
 	return 0xDEADBEEF;
 	*/
-	clear();
+	//clear();
 	shell();
 	return 0;
 }

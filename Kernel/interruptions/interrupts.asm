@@ -72,6 +72,7 @@ SECTION .text
 
 %macro irqHandlerMaster 1
 	pushState
+	cli
 
 	mov rdi, %1 ; pasaje de parametro
 	call irqDispatcher
@@ -81,6 +82,7 @@ SECTION .text
 	out 20h, al
 
 	popState
+	sti
 	iretq
 %endmacro
 

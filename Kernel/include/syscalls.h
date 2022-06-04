@@ -24,4 +24,8 @@ void sleep(int secs);
 
 void setScreenMode(int mode);
 
+void storeProgram(char*p1, char*p2);
+
+char * getProgram(char id);
+
 #endif

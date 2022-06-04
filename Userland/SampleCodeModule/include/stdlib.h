@@ -35,6 +35,10 @@ char getDateComponent(int value);
 
 void setScreenMode(int mode);
 
+void storeProgram(char*p1, char*p2);
+
+char * getProgram(char id);
+
 //uint64_t hex2int(char *hex, int *ok);
 
 #endif
