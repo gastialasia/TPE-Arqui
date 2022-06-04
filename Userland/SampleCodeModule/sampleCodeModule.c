@@ -20,7 +20,6 @@ int main() {
 
 	return 0xDEADBEEF;
 	*/
-	//clear();
 	shell();
 	return 0;
 }

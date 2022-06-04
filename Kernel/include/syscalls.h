@@ -28,4 +28,6 @@ void storeProgram(char*p1, char*p2);
 
 char * getProgram(char id);
 
+int64_t getLast();
+
 #endif

@@ -6,8 +6,14 @@
 #define DEFAULT_RETVALUE -1
 
 static char mayusc = 0;
+unsigned char last;
+
 static char screenMode = 1;
 static char * runningPrograms[2] = {0,0};
+
+void (*printCharPtr)(char*) = ncPrintChar;
+void (*printPtr)(char*) = ncPrint;
+void (*printHexPtr)(char*) = ncPrintHex;
 
 char * getScreenModePtr(){
 	return &screenMode;
@@ -16,12 +22,6 @@ char * getScreenModePtr(){
 char ** getRunningProgramPtr(int index){
 	return &runningPrograms[index];
 }
-//runningPrograms = opcode, date
-//Screen mode 2
-
-void (*printCharPtr)(char*) = ncPrintChar;
-void (*printPtr)(char*) = ncPrint;
-void (*printHexPtr)(char*) = ncPrintHex;
 
 int64_t write(int fd, const char *buffer, size_t count)
 {
@@ -58,6 +58,9 @@ int64_t read(int fd, char *buffer, size_t count)
 			case 14:
 			case 15:
 				mayusc = 1;
+				break;
+			case 'q':
+				runShell();
 				break;
 			case 170:
 			case 182:
@@ -170,6 +173,12 @@ void inforeg()
 	printPtr("R15: ");
 	printHexPtr(regs->r15);
 	printCharPtr('\n');
+}
+
+int64_t getLast(){
+    if(last)
+        ncPrintChar(last);
+    return last;
 }
 
 void sleep(int secs)

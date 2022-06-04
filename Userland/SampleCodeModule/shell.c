@@ -2,6 +2,7 @@
 #include <shell.h>
 #include <programs.h>
 #include <stdint.h>
+
 #define LENGTH 100
 #define MAXDIGITS 21
 #define MAXBUFFER 100
@@ -21,6 +22,8 @@ void shell(void){
         function_type prog2 = getFuncFromString(prevCommand2);
         SplitScreenWrapper(prog1,prog2);
     }
+
+    clear();
 
     char buffer[LENGTH];
     while(1){
@@ -100,9 +103,12 @@ void simpleScreenWrapper(char(*fn)(void)){
     //printf(buffer);
     while(isRunning){
         //printf(buffer);
+        sleep(1);
+        if (getlast()=='q'){
+            return;
+        }
         isRunning = fn();
         putchar('\n');
-        sleep(1);
     }
     //printf("Program ended\n");
 }

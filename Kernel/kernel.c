@@ -82,6 +82,10 @@ void * initializeKernelBinary()
 	return getStackBase();
 }
 
+void runShell(){
+    ((EntryPoint)sampleCodeModuleAddress)();
+}
+
 int main()
 {
 	ncClear();
@@ -110,6 +114,6 @@ int main()
 
 	*/
 
-	((EntryPoint)sampleCodeModuleAddress)();
+	runShell();
 	return 0;
 }

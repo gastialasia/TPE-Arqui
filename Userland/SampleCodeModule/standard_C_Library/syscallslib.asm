@@ -10,6 +10,7 @@ GLOBAL divzero
 GLOBAL opcode
 GLOBAL sys_storeProgram
 GLOBAL sys_getProgram
+GLOBAL sys_getLast
 
 section .text
 
@@ -60,6 +61,11 @@ sys_storeProgram:
 
 sys_getProgram:
     mov rax, 11
+    int 80h
+    ret
+
+sys_getLast:
+    mov rax,9
     int 80h
     ret
 
