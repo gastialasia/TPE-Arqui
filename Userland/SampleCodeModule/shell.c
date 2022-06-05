@@ -98,8 +98,6 @@ function_type getFuncFromString(char*str){
 void simpleScreenWrapper(char(*fn)(void)){
     //char buffer[MAXBUFFER];
     char isRunning=fn();
-    putchar('\n');
-    sleep(1);
     //printf(buffer);
     while(isRunning){
         //printf(buffer);
@@ -109,7 +107,6 @@ void simpleScreenWrapper(char(*fn)(void)){
             return;
         }
         isRunning = fn();
-        putchar('\n');
     }
     //printf("Program ended\n");
 }
@@ -142,7 +139,6 @@ void SplitScreenWrapper(char(*fn1)(void),char(*fn2)(void)){
           if (getlast()=='l'){
               isRunning1=0;
           }
-          putchar('\n');
           // Hay que chequear porque entra una vez mas de las que deberia
       }
       if (isRunning2){
@@ -151,8 +147,6 @@ void SplitScreenWrapper(char(*fn1)(void),char(*fn2)(void)){
           if (getlast()=='r'){
               isRunning2=0;
           }
-          putchar('\n');
-          // Idem anterior
       }
     }
     printf("Presione 'q' para volver a la shell");

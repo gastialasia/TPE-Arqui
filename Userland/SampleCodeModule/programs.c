@@ -56,6 +56,7 @@ char fibo(void){
     }
     uintToBase(aux,buff,10);
     printf(buff);
+    putchar('\n');
     return 1;
 }
 
@@ -79,6 +80,7 @@ char primos(void){ //Esta funcion es una criba de Eratosthenes casera
             lastPrimo = i;
             uintToBase(lastPrimo,buff,10);
             printf(buff);
+            putchar('\n');
             return 1;
         }
     }
