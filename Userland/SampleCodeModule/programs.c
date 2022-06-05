@@ -97,7 +97,3 @@ char infoRegisters(){
 char nullProgram(){
     return 0;
 }
-
-unsigned char getlast(){
-    return sys_getLast();
-}

@@ -150,3 +150,7 @@ void storeProgram(char*p1, char*p2){
 char * getProgram(char id){
     return sys_getProgram(id);
 }
+
+unsigned char getlast(){
+    return sys_getLast();
+}

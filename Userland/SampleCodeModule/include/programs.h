@@ -10,6 +10,5 @@ char date(void);
 char invalid(void);
 char infoRegisters(void);
 char nullProgram();
-unsigned char getlast();
 
 #endif

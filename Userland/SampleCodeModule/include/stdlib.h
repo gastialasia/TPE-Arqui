@@ -39,6 +39,8 @@ void storeProgram(char*p1, char*p2);
 
 char * getProgram(char id);
 
+unsigned char getlast();
+
 //uint64_t hex2int(char *hex, int *ok);
 
 #endif

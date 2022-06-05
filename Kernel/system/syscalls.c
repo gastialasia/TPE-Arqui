@@ -59,9 +59,6 @@ int64_t read(int fd, char *buffer, size_t count)
 			case 15:
 				mayusc = 1;
 				break;
-			case 'q':
-				runShell();
-				break;
 			case 170:
 			case 182:
 				mayusc = 0;
@@ -176,8 +173,6 @@ void inforeg()
 }
 
 int64_t getLast(){
-    if(last)
-        ncPrintChar(last);
     return last;
 }
 

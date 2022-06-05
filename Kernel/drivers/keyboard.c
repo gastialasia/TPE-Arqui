@@ -4,7 +4,6 @@
 #include <syscalls.h>
 
 unsigned char key = 0;
-
 extern unsigned char last;
 
 unsigned char readKey(){

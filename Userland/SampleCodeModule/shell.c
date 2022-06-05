@@ -72,7 +72,7 @@ function_type getFuncFromString(char*str){
         toRet = &date;
     } else if (strcmp("help",str)){
         toRet = &help;
-    } else if (strcmp("fibonacci",str)){
+    } else if (strcmp("fibo",str)){
         toRet = &fibo;
     } else if (strcmp("primos",str)){
         toRet = &primos;
@@ -105,6 +105,7 @@ void simpleScreenWrapper(char(*fn)(void)){
         //printf(buffer);
         sleep(1);
         if (getlast()=='q'){
+            returnToSingleScreen();
             return;
         }
         isRunning = fn();
@@ -113,10 +114,23 @@ void simpleScreenWrapper(char(*fn)(void)){
     //printf("Program ended\n");
 }
 
+void returnToSingleScreen(){
+    clear();
+    reset_fibo();
+    reset_primo();
+    sleep(1);
+}
+
 void SplitScreenWrapper(char(*fn1)(void),char(*fn2)(void)){
     char isRunning1=1;
     char isRunning2=1;
     while(isRunning1||isRunning2){
+        if (getlast()=='q'){
+            returnToSingleScreen();
+            storeProgram(0,0);
+            setScreenMode(1);
+            return;
+        }
         sleep(1);
       if (isRunning1){
           setScreenMode(2);
@@ -125,21 +139,25 @@ void SplitScreenWrapper(char(*fn1)(void),char(*fn2)(void)){
           if (isRunning1 == 0){
               storeProgram("null",command2); // En caso de ya haber terminado el programa, lo borramos de los comandos guardados en el kernel
           }
+          if (getlast()=='l'){
+              isRunning1=0;
+          }
           putchar('\n');
           // Hay que chequear porque entra una vez mas de las que deberia
       }
       if (isRunning2){
           setScreenMode(3);
           isRunning2 = fn2();
+          if (getlast()=='r'){
+              isRunning2=0;
+          }
           putchar('\n');
           // Idem anterior
       }
-      //sleep(1);
     }
-    while(1){
-
-    }
-    //Completar con esperar la tecla
+    printf("Presione 'q' para volver a la shell");
+    while (getlast()!='q');
+    returnToSingleScreen();
     storeProgram(0,0);
     setScreenMode(1);
 }

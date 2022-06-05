@@ -41,7 +41,11 @@ void killRunningProgram(){
 
 void rebootTerm(){
 
-	//sleep(5);
+	if (*getScreenModePtr()==1){
+		sleep(3);
+	}
+
+
 
 	//write(1,"Presione cualquier tecla para volver a la shell",48);
 
