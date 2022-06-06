@@ -10,5 +10,5 @@ char date(void);
 char invalid(void);
 char infoRegisters(void);
 char nullProgram();
-
+char printMemory(void);
 #endif

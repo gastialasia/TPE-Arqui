@@ -13,10 +13,8 @@ static char command2[MAXBUFFER];
 void shell(void){
 
     //Chequeo si había un programa corriendo antes
-
     char * prevCommand1 = getProgram(0);
     char * prevCommand2 = getProgram(1);
-
     if (prevCommand1||prevCommand2){
         function_type prog1 = getFuncFromString(prevCommand1);
         function_type prog2 = getFuncFromString(prevCommand2);
@@ -24,7 +22,6 @@ void shell(void){
     }
 
     clear();
-
     char buffer[LENGTH];
     while(1){
         printf("User:$ ");
@@ -85,7 +82,7 @@ function_type getFuncFromString(char*str){
     } else if (strcmp("inforeg",str)){
         toRet = &infoRegisters;
     } else if (strcmp("printmem",str)){
-        toRet =&invalid;
+        toRet =&printMemory;
         //toRet = &printmem;
     } else if (strlen(str)==0||strcmp("null",str)){
         toRet = &nullProgram;

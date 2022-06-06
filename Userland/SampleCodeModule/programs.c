@@ -1,3 +1,4 @@
+#include "include/programs.h"
 #include <stdlib.h>
 #include <stdint.h>
 
@@ -98,4 +99,19 @@ char infoRegisters(){
 
 char nullProgram(){
     return 0;
+}
+
+char printMemory(){
+	char pos[8] ={0};
+	printf("Ingrese 8 caracteres en hexa\n");
+	int len = scanf(pos);
+	int ok = 1;
+	uint64_t pointer = hex2int(pos,&ok);
+	if(ok){
+		sys_printMem(&pointer);
+	}else {
+	printf("Invalid dir");
+	putchar('\n');
+	}
+	return 0;
 }

@@ -84,10 +84,11 @@ int scanf(char * buffer) {
 
 uint64_t hex2int(char *hex, int *ok) {
     uint64_t val = 0;
-    while (*hex) {
+    int len = 0;
+    while (*hex && len <8 ) {
         // get current character then increment
         uint8_t byte = *hex++;
-
+	
         if (!(byte >= '0' && byte <= '9') && !(byte >= 'a' && byte <= 'f') && !(byte >= 'A' && byte <= 'F')) {
           *ok = 0;
           return 0;
@@ -98,6 +99,7 @@ uint64_t hex2int(char *hex, int *ok) {
         else if (byte >= 'A' && byte <='F') byte = byte - 'A' + 10;
         // shift 4 to make space for new digit, and add the 4 bits of the new digit
         val = (val << 4) | (byte & 0xF);
+	len++;
     }
     return val;
 }

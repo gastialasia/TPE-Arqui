@@ -67,7 +67,7 @@ int64_t read(int fd, char *buffer, size_t count)
 			{
 				if (mayusc)
 					key = toMayusc(key);
-				ncPrintChar(key);
+				printCharPtr(key);
 				buffer[k++] = key;
 			}
 			}
