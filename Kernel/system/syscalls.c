@@ -103,7 +103,9 @@ void printMem(uint64_t pointer)
 
 void clear()
 {
-	ncClear();
+	if(screenMode==1){ //Simple screen
+		ncClear();
+	}
 }
 
 int64_t date(char value)

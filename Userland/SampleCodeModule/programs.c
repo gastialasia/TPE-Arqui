@@ -1,17 +1,17 @@
-#include "include/programs.h"
+#include <programs.h>
 #include <stdlib.h>
 #include <stdint.h>
 
 #define LIMIT64 0b0111111111111111111111111111111111111111111111111111111111111111 //2^(63)-1
 
-static uint64_t fibo1=0;
+static uint64_t fibo1=-1; //Lo inicializamos en -1 para que sea declarada la variable en section .data y no en 0 pues estaría en section .bss y al reiniciar el programa se limpiaría la varibale impriendo 2 veces el 0 inicial
 static uint64_t fibo2=1;
 static uint64_t lastPrimo=1;
 
 static char buff[300];
 
 char help(void){
-    printf("Commands:\n-fibonacci\n-help\n-printmem\n-date\n-opcode\n");
+    printf("Commands:\n-fibonacci\n-primos\n-printmem\n-date\n-opcode\n-divzero\n-null\n-help\n-clear\n");
     return 0;
 }
 
@@ -49,6 +49,8 @@ char date(void){
 char fibo(void){
     // Deja en el buffer el numero convertido a string
     // Devuelve 1 si el programa sigue corriendo, 0 sino
+    if(fibo1==-1)
+        fibo1=0;
     uint64_t aux = fibo1;
     fibo1 = fibo2;
     fibo2 = aux+fibo1;

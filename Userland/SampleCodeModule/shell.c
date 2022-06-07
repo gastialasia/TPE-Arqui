@@ -86,7 +86,7 @@ function_type getFuncFromString(char *str)
     {
         toRet = &help;
     }
-    else if (strcmp("fibo", str))
+    else if (strcmp("fibo", str) || strcmp("fibonacci", str))
     {
         toRet = &fibo;
     }
@@ -113,7 +113,6 @@ function_type getFuncFromString(char *str)
     else if (strcmp("printmem", str))
     {
         toRet = &printMemory;
-        // toRet = &printmem;
     }
     else if (strlen(str) == 0 || strcmp("null", str))
     {
@@ -148,8 +147,8 @@ void simpleScreenWrapper(char (*fn)(void))
 void returnToSingleScreen()
 {
     clear();
-    reset_fibo();
     reset_primo();
+    reset_fibo();
     sleep(500);
 }
 
