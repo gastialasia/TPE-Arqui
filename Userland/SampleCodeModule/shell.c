@@ -7,8 +7,8 @@
 #define MAXDIGITS 21
 #define MAXBUFFER 100
 
-static char command1[MAXBUFFER];
-static char command2[MAXBUFFER];
+static char command1[MAXBUFFER] = "null";
+static char command2[MAXBUFFER] = "null";
 
 void shell(void)
 {
@@ -16,13 +16,14 @@ void shell(void)
     // Chequeo si había un programa corriendo antes
     char *prevCommand1 = getProgram(0);
     char *prevCommand2 = getProgram(1);
-    if (prevCommand1 || prevCommand2)
+
+    if (!strcmp(prevCommand1,"null") || !strcmp(prevCommand2,"null"))
     {
         function_type prog1 = getFuncFromString(prevCommand1);
         function_type prog2 = getFuncFromString(prevCommand2);
         SplitScreenWrapper(prog1, prog2);
     }
-
+    setScreenMode(1);
     clear();
     char buffer[LENGTH];
     while (1)
@@ -65,9 +66,9 @@ void parser(char *buffer)
     else
     {
         // El flag es 1, entonces hay un pipe
-        storeProgram(commands[0], commands[1]);
         strcpy(command1, commands[0]);
         strcpy(command2, commands[1]);
+        storeProgram(command1, command2);
         function_type prog1 = getFuncFromString(commands[0]);
         function_type prog2 = getFuncFromString(commands[1]);
         SplitScreenWrapper(prog1, prog2);
@@ -161,7 +162,7 @@ void SplitScreenWrapper(char (*fn1)(void), char (*fn2)(void))
         if (getlast() == 'q')
         {
             returnToSingleScreen();
-            storeProgram(0, 0);
+            storeProgram("null", "null");
             setScreenMode(1);
             return;
         }
@@ -193,9 +194,8 @@ void SplitScreenWrapper(char (*fn1)(void), char (*fn2)(void))
         }
     }
     printf("Presione 'q' para volver a la shell");
-    while (getlast() != 'q')
-        ;
+    while (getlast() != 'q');
     returnToSingleScreen();
-    storeProgram(0, 0);
+    storeProgram("null", "null");
     setScreenMode(1);
 }

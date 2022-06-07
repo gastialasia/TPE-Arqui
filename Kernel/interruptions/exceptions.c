@@ -2,6 +2,7 @@
 
 #define ZERO_EXCEPTION_ID 0
 #define OPCODE_EXCEPTION_ID 6
+#define TIMEOUT 3000
 
 extern void (*printCharPtr)(char*);
 extern void (*printPtr)(char*);
@@ -35,15 +36,16 @@ static void opcode(){
 void killRunningProgram(){
 	char screenMode = *getScreenModePtr();
 	if (screenMode>=2) {
-		**getRunningProgramPtr(screenMode-2)=0; // Le pongo un null terminated en el primer caracter para "arruinar el string"
+		*getRunningProgramPtr(screenMode-2)="null"; // Le pongo un null terminated en el primer caracter para "arruinar el string"
 	}
 }
 
 void rebootTerm(){
 
-	if (*getScreenModePtr()==1){
-		sleep(3000);
+	if (*getScreenModePtr()==1||*getScreenModePtr()==3){
+		sleep(TIMEOUT);
 	}
+
 
 
 

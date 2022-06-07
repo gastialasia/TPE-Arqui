@@ -9,7 +9,7 @@ static char mayusc = 0;
 unsigned char last;
 
 static char screenMode = 1;
-static char * runningPrograms[2] = {0,0};
+static char * runningPrograms[2] = {"null","null"};
 
 void (*printCharPtr)(char*) = ncPrintChar;
 void (*printPtr)(char*) = ncPrint;
@@ -215,8 +215,5 @@ char * getProgram(char id){
 	if (id>1||id<0){
 		return 0;
 	}
-	//ncPrint("Getting program: ");
-	//ncPrint(runningPrograms[id]);
-	//ncPrint("\n");
 	return runningPrograms[id];
 }
