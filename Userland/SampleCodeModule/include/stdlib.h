@@ -41,6 +41,6 @@ char * getProgram(char id);
 
 unsigned char getlast();
 
-//uint64_t hex2int(char *hex, int *ok);
+void takeSnapShot();
 
 #endif

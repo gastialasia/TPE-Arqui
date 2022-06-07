@@ -90,6 +90,10 @@ int64_t read(int fd, char *buffer, size_t count)
 	return DEFAULT_RETVALUE;
 }
 
+void snapshotRegs(){
+	loadBackupRegs(primaryBackup, secondaryBackup);
+}
+
 void printMem(uint64_t pointer)
 {
 	uint8_t *start = (uint8_t *)pointer;

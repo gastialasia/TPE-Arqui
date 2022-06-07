@@ -36,4 +36,6 @@ void saveRegisters(registersT* registers);
 
 void loadBackup(registersT* regs, registersT* backup);
 
+void snapshotRegs();
+
 #endif

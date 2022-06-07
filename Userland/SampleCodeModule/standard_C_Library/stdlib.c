@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <syscallslib.h>
+#include "../include/syscallslib.h"
 #include <stdint.h>
 
 #define STDIN 1
@@ -155,4 +155,8 @@ char * getProgram(char id){
 
 unsigned char getlast(){
     return sys_getLast();
+}
+
+void takeSnapShot(){
+    sys_snapshotRegs();
 }

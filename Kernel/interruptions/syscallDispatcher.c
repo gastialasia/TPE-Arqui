@@ -41,6 +41,9 @@ int64_t syscallDispatcher(int64_t arg0, int64_t arg1, int64_t arg2) {
 		break;
 	case 11:
 		return getProgram((char)arg0);
+    case 12:
+        snapshotRegs();
+        break;
     default:
         return -1;
     }

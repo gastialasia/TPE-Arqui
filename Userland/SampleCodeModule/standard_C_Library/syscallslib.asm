@@ -11,6 +11,7 @@ GLOBAL opcode
 GLOBAL sys_storeProgram
 GLOBAL sys_getProgram
 GLOBAL sys_getLast
+GLOBAL sys_snapshotRegs
 
 section .text
 
@@ -66,6 +67,11 @@ sys_getProgram:
 
 sys_getLast:
     mov rax,9
+    int 80h
+    ret
+
+sys_snapshotRegs:
+    mov rax, 12
     int 80h
     ret
 

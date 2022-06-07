@@ -56,12 +56,4 @@ void rebootTerm(){
 		sleep(TIMEOUT);
 		ok = 0;
 	}
-
-
-
-	//write(1,"Presione cualquier tecla para volver a la shell",48);
-
-
-
-	//ncClear();
 }

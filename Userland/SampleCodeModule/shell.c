@@ -139,6 +139,9 @@ void simpleScreenWrapper(char (*fn)(void))
             returnToSingleScreen();
             return;
         }
+        if(getlast() == 17){ //F1
+            takeSnapShot();
+        }
         isRunning = fn();
     }
     // printf("Program ended\n");
@@ -164,6 +167,9 @@ void SplitScreenWrapper(char (*fn1)(void), char (*fn2)(void))
             storeProgram("null", "null");
             setScreenMode(1);
             return;
+        }
+        if(getlast() == 17){ //F1
+            takeSnapShot();
         }
         sleep(300);
         if (isRunning1)
