@@ -20,7 +20,7 @@ void inforeg();
 
 int64_t date(char value);
 
-void sleep(int secs);
+void sleep(int ms);
 
 void setScreenMode(int mode);
 

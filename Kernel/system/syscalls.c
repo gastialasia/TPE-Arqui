@@ -176,9 +176,9 @@ int64_t getLast(){
     return last;
 }
 
-void sleep(int secs)
+void sleep(int ms)
 {
-	tSleep(secs);
+	tSleep(ms);
 }
 
 void setScreenMode(int mode)

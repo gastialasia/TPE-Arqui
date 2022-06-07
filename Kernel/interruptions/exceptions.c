@@ -42,7 +42,7 @@ void killRunningProgram(){
 void rebootTerm(){
 
 	if (*getScreenModePtr()==1){
-		sleep(3);
+		sleep(3000);
 	}
 
 

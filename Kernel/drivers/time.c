@@ -17,8 +17,8 @@ int seconds_elapsed() {
 	return ticks / TICKSPERSECOND;
 }
 
-void tSleep(int secs){
-	int final_ticks = ticks + secs*TICKSPERSECOND;
+void tSleep(int ms){
+	int final_ticks = ticks + ms/55;///;secs*TICKSPERSECOND
 	while(ticks <= final_ticks)
 		_hlt();
 }
