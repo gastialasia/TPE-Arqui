@@ -8,10 +8,9 @@ typedef struct{
     uint64_t rbx;
     uint64_t rcx;
     uint64_t rdx;
+    uint64_t rbp;
     uint64_t rdi;
     uint64_t rsi;
-    uint64_t rbp;
-    uint64_t rsp;
     uint64_t r8;
     uint64_t r9;
     uint64_t r10;
@@ -27,7 +26,6 @@ void * memcpy(void * destination, const void * source, uint64_t length);
 
 char *cpuVendor(char *result);
 char rtcGetter(char value);
-void test(void);
 registersT* getRegisters(void);
 
 #endif

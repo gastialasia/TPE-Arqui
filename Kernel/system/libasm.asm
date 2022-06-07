@@ -1,9 +1,6 @@
 GLOBAL cpuVendor
 GLOBAL rtcGetter
-GLOBAL test
-GLOBAL getRegisters
-
-EXTERN _sti
+GLOBAL saveRegisters
 
 section .text
 	
@@ -44,54 +41,30 @@ rtcGetter:
 	mov rsp, rbp
 	pop rbp
 	ret
-	
-test:
-    push rbp
-    mov rbp, rsp
 
-    mov rax, 6
-    mov rdi, 4
-	
-	int 80h
+%macro saveRegister 1
+	mov rax, [rsp + %1]
+	mov [rdi], rax
+	add rdi, 8
+%endmacro
 
-    mov rsp, rbp
-    pop rbp
-    ret
-
-;section .data
-;len1 equ 4
-;str2 db "hola",0
-
-;section .bss
-;str1 resb 8
-
-
-getRegisters:
-	push rbp
-	mov rbp, rsp
-
-	mov [struct_reg], rax
-	mov [struct_reg+1*8], rbx
-	mov [struct_reg+2*8], rcx
-	mov [struct_reg+3*8], rdx
-	mov [struct_reg+4*8], rdi
-	mov [struct_reg+5*8], rsi
-	mov [struct_reg+6*8], rbp
-	mov [struct_reg+7*8], rsp
-	mov [struct_reg+8*8], r8
-	mov [struct_reg+9*8], r9
-	mov [struct_reg+10*8], r10
-	mov [struct_reg+11*8], r11
-	mov [struct_reg+12*8], r12
-	mov [struct_reg+13*8], r13
-	mov [struct_reg+14*8], r14
-	mov [struct_reg+15*8], r15
-
-	mov rax, struct_reg
-
-	mov rsp, rbp
-	pop rbp
-	ret
+saveRegisters:
+	saveRegister 136  ; rax
+	saveRegister 128
+	saveRegister 120
+	saveRegister 112
+	saveRegister 104
+	saveRegister 96
+	saveRegister 88
+	saveRegister 80
+	saveRegister 72
+	saveRegister 64
+	saveRegister 56
+	saveRegister 48
+	saveRegister 40
+	saveRegister 32
+	saveRegister 24		; r15
+  	ret
 
 section .bss
 struct_reg resb 128

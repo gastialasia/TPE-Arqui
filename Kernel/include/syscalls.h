@@ -30,4 +30,10 @@ char * getProgram(char id);
 
 int64_t getLast();
 
+//void saveBackup();
+
+void saveRegisters(registersT* registers);
+
+void loadBackup(registersT* regs, registersT* backup);
+
 #endif

@@ -14,6 +14,11 @@ static char * runningPrograms[2] = {"null","null"};
 void (*printCharPtr)(char*) = ncPrintChar;
 void (*printPtr)(char*) = ncPrint;
 void (*printHexPtr)(char*) = ncPrintHex;
+void (*printRegPtr)(const char *, uint64_t) = ncPrintReg;
+
+registersT primary, secondary;
+registersT *primaryBackup = &primary;
+registersT *secondaryBackup = &secondary;
 
 char * getScreenModePtr(){
 	return &screenMode;
@@ -59,6 +64,9 @@ int64_t read(int fd, char *buffer, size_t count)
 			case 15:
 				mayusc = 1;
 				break;
+			case 17:
+        		loadBackupRegs(primaryBackup, secondaryBackup);
+        		break;
 			case 170:
 			case 182:
 				mayusc = 0;
@@ -103,73 +111,48 @@ int64_t date(char value)
 	return rtcGetter(value);
 }
 
+void loadBackupRegs(registersT* regs, registersT *backup) {
+  regs->rax = backup->rax;
+	regs->rbx = backup->rbx;
+	regs->rcx = backup->rcx;
+	regs->rdx = backup->rdx;
+	regs->rbp = backup->rbp;
+	regs->rdi = backup->rdi;
+	regs->rsi = backup->rsi;
+	regs->r8 = backup->r8;
+	regs->r9 = backup->r9;
+	regs->r10 = backup->r10;
+	regs->r11 = backup->r11;
+	regs->r12 = backup->r12;
+	regs->r13 = backup->r13;
+	regs->r14 = backup->r14;
+	regs->r15 = backup->r15;
+}
+
+void saveBackup() {
+  saveRegisters(secondaryBackup);
+}
+
 void inforeg()
 {
 	registersT *regs;	   // Pasamos el puntero a la struct para llenarla con los valores de los registros
-	regs = getRegisters(); // en la funcion fillRegisters de libasm
-	printPtr("RAX: ");
-	printHexPtr(regs->rax);
-	printCharPtr('\n');
-
-	printPtr("RBX: ");
-	printHexPtr(regs->rbx);
-	printCharPtr('\n');
-
-	printPtr("RCX: ");
-	printHexPtr(regs->rcx);
-	printCharPtr('\n');
-
-	printPtr("RDX: ");
-	printHexPtr(regs->rdx);
-	printCharPtr('\n');
-
-	printPtr("RDI: ");
-	printHexPtr(regs->rdi);
-	printCharPtr('\n');
-
-	printPtr("RSI: ");
-	printHexPtr(regs->rsi);
-	printCharPtr('\n');
-
-	printPtr("RBP: ");
-	printHexPtr(regs->rbp);
-	printCharPtr('\n');
-
-	printPtr("RSP: ");
-	printHexPtr(regs->rsp);
-	printCharPtr('\n');
-
-	printPtr("R8: ");
-	printHexPtr(regs->r8);
-	printCharPtr('\n');
-
-	printPtr("R9: ");
-	printHexPtr(regs->r9);
-	printCharPtr('\n');
-
-	printPtr("R10: ");
-	printHexPtr(regs->r10);
-	printCharPtr('\n');
-
-	printPtr("R11: ");
-	printHexPtr(regs->r11);
-	printCharPtr('\n');
-
-	printPtr("R12: ");
-	printHexPtr(regs->r12);
-	printCharPtr('\n');
-
-	printPtr("R13: ");
-	printHexPtr(regs->r13);
-	printCharPtr('\n');
-
-	printPtr("R14: ");
-	printHexPtr(regs->r14);
-	printCharPtr('\n');
-
-	printPtr("R15: ");
-	printHexPtr(regs->r15);
-	printCharPtr('\n');
+	regs = primaryBackup; // en la funcion fillRegisters de libasm
+	
+	printRegPtr("RAX", regs->rax);
+	printRegPtr("RBX", regs->rbx);
+	printRegPtr("RCX", regs->rcx);
+	printRegPtr("RDX", regs->rdx);
+	printRegPtr("RDI", regs->rdi);
+	printRegPtr("RSI", regs->rsi);
+	printRegPtr("RBP", regs->rbp);
+	printRegPtr("R8", regs->r8);
+	printRegPtr("R9", regs->r9);
+	printRegPtr("R10", regs->r10);
+	printRegPtr("R11", regs->r11);
+	printRegPtr("R12", regs->r12);
+	printRegPtr("R13", regs->r13);
+	printRegPtr("R14", regs->r14);
+	printRegPtr("R15", regs->r15);
 }
 
 int64_t getLast(){
@@ -191,18 +174,21 @@ void setScreenMode(int mode)
 		printCharPtr = ncPrintCharL;
 		printPtr = ncPrintL;
 		printHexPtr = ncPrintHexL;
+		printRegPtr = ncPrintRegL;
 		break;
 	case 3:
 		ncSplit();
 		printCharPtr = ncPrintCharR;
 		printPtr = ncPrintR;
 		printHexPtr = ncPrintHexR;
+		printRegPtr = ncPrintRegR;
 		break;
 	default:
 		ncUnSplit();
 		printCharPtr = ncPrintChar;
 		printPtr = ncPrint;
 		printHexPtr = ncPrintHex;
+		printRegPtr = ncPrintReg;
 	}
 }
 

@@ -36,6 +36,10 @@ void ncPrintBase(uint64_t value, uint32_t base);
 void ncPrintBaseL(uint64_t value, uint32_t base);
 void ncPrintBaseR(uint64_t value, uint32_t base);
 
+void ncPrintReg(const char *regName, uint64_t regValue);
+void ncPrintRegL(const char *regName, uint64_t regValue);
+void ncPrintRegR(const char *regName, uint64_t regValue);
+
 void ncClear();
 
 void ncSplit();

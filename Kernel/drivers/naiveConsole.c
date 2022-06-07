@@ -208,30 +208,6 @@ void ncNewlineR()
 	while((uint64_t)(currentVideoR - video) % (width * 2) != 0);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // ncPrintDec (normal, left y right)
 
 void ncPrintDec(uint64_t value)
@@ -301,6 +277,39 @@ void ncPrintBaseR(uint64_t value, uint32_t base)
 {
     uintToBase(value, buffer, base);
     ncPrintR(buffer);
+}
+
+void ncPrintReg(const char *regName, uint64_t regValue)
+{
+	ncPrint(regName);
+	ncPrint(": ");
+	int digits = uintToBase(regValue, buffer, 16);
+	for (int i = 1; i < 16 - digits; i++)
+		ncPrint("0");
+	ncPrint(buffer);
+	ncNewline();
+}
+
+void ncPrintRegL(const char *regName, uint64_t regValue)
+{
+	ncPrintL(regName);
+	ncPrintL(": ");
+	int digits = uintToBase(regValue, buffer, 16);
+	for (int i = 1; i < 16 - digits; i++)
+		ncPrintL("0");
+	ncPrintL(buffer);
+	ncNewlineL();
+}
+
+void ncPrintRegR(const char *regName, uint64_t regValue)
+{
+	ncPrintR(regName);
+	ncPrintR(": ");
+	int digits = uintToBase(regValue, buffer, 16);
+	for (int i = 1; i < 16 - digits; i++)
+		ncPrintR("0");
+	ncPrintR(buffer);
+	ncNewlineR();
 }
 
 // ncClear (normal)

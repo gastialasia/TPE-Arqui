@@ -15,14 +15,18 @@ GLOBAL _irq05Handler
 
 GLOBAL _exception0Handler
 GLOBAL _exception6Handler
-
 GLOBAL _syscallHandler
+GLOBAL printAllRegs
+
 EXTERN syscallsetter
 EXTERN irqDispatcher
 EXTERN exceptionDispatcher
 EXTERN syscallDispatcher
-EXTERN inforeg
+EXTERN saveBackup
+EXTERN ncPrintReg
 EXTERN rebootTerm
+
+EXTERN printRegPtr	;Este puntero a funcion debe ser desreferenciado para poder ser llamado
 
 SECTION .text
 
@@ -74,6 +78,8 @@ SECTION .text
 	pushState
 	cli
 
+	call saveBackup
+
 	mov rdi, %1 ; pasaje de parametro
 	call irqDispatcher
 
@@ -91,9 +97,10 @@ SECTION .text
 
 	mov rdi, %1 ; pasaje de parametro
 	call exceptionDispatcher
-	call inforeg
+	call printAllRegs
 	popState
 	pop rax ;rip esta "arriba"  en el stack
+	printReg rax, 14
 
 	call rebootTerm
 
@@ -117,6 +124,33 @@ SECTION .text
 	popStateWithoutRax
 	iretq
 %endmacro
+
+%macro printReg 2
+	mov rsi, %1
+	lea rdi, [regsNames + 4 * %2]
+	call [printRegPtr]			;Desreferencio el puntero a funcion
+%endmacro
+
+printAllRegs: 			;Imprime los registros de la instancia en la cual se lo llamó
+	push rdi
+	printReg rsi, 1
+	pop rdi
+	printReg rdi, 0
+	printReg rax, 2
+	printReg rbx, 3
+	printReg rcx, 4
+	printReg rdx, 5
+	printReg r8, 6
+	printReg r9, 7
+	printReg r10, 8
+	printReg r11, 9
+	printReg r12, 10
+	printReg r13, 11
+	printReg r14, 12
+	printReg r15, 13
+	printReg rsp, 15
+	printReg rbp, 16
+	ret
 
 _hlt:
 	sti
@@ -191,7 +225,9 @@ haltcpu:
 	hlt
 	ret
 
-
+section .rodata
+	; dd = 4 byte value. Hacemos un "array" donde cada posicion es de 4 bytes (cada caracter ocupa 1 byte, de esta forma todos terminan en 0)
+	regsNames dd "rdi", "rsi", "rax", "rbx", "rcx", "rdx", "r8 ", "r9 ", "r10", "r11", "r12", "r13", "r14", "r15", "rip", "rsp", "rbp" ; 17 registros
 
 SECTION .bss
 	aux resq 1

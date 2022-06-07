@@ -150,7 +150,7 @@ void returnToSingleScreen()
     clear();
     reset_fibo();
     reset_primo();
-    sleep(1000);
+    sleep(500);
 }
 
 void SplitScreenWrapper(char (*fn1)(void), char (*fn2)(void))
