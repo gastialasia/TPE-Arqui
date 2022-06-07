@@ -13,28 +13,22 @@ static int split = 0;
 
 // ncPrint (normal, left y right)
 
-void ncPrint(const char * string)
-{
+void ncPrintParametric(const char * str, void (*fn)(const char * string)){
 	int i;
-
-	for (i = 0; string[i] != 0; i++)
-		ncPrintChar(string[i]);
+	for (i = 0; str[i] != 0; i++)
+		fn(str[i]);
 }
 
-void ncPrintL(const char * string)
-{
-	int i;
-
-	for (i = 0; string[i] != 0; i++)
-		ncPrintCharL(string[i]);
+void ncPrint(const char * string){
+	ncPrintParametric(string, ncPrintChar);
 }
 
-void ncPrintR(const char * string)
-{
-	int i;
+void ncPrintL(const char * string){
+	ncPrintParametric(string, ncPrintCharL);
+}
 
-	for (i = 0; string[i] != 0; i++)
-		ncPrintCharR(string[i]);
+void ncPrintR(const char * string){
+	ncPrintParametric(string, ncPrintCharR);
 }
 
 // ncSplit
@@ -279,37 +273,29 @@ void ncPrintBaseR(uint64_t value, uint32_t base)
     ncPrintR(buffer);
 }
 
-void ncPrintReg(const char *regName, uint64_t regValue)
-{
-	ncPrint(regName);
-	ncPrint(": ");
+void ncPrintRegParametric(const char*regName, uint64_t regValue, void (*fn)(char*)){
+	fn(regName);
+	fn(": ");
 	int digits = uintToBase(regValue, buffer, 16);
 	for (int i = 1; i < 16 - digits; i++)
-		ncPrint("0");
-	ncPrint(buffer);
-	ncNewline();
+		fn("0");
+	fn(buffer);
+	fn("\n");
+}
+
+void ncPrintReg(const char *regName, uint64_t regValue)
+{
+	ncPrintRegParametric(regName, regValue, ncPrint);
 }
 
 void ncPrintRegL(const char *regName, uint64_t regValue)
 {
-	ncPrintL(regName);
-	ncPrintL(": ");
-	int digits = uintToBase(regValue, buffer, 16);
-	for (int i = 1; i < 16 - digits; i++)
-		ncPrintL("0");
-	ncPrintL(buffer);
-	ncNewlineL();
+	ncPrintRegParametric(regName, regValue, ncPrintL);
 }
 
 void ncPrintRegR(const char *regName, uint64_t regValue)
 {
-	ncPrintR(regName);
-	ncPrintR(": ");
-	int digits = uintToBase(regValue, buffer, 16);
-	for (int i = 1; i < 16 - digits; i++)
-		ncPrintR("0");
-	ncPrintR(buffer);
-	ncNewlineR();
+	ncPrintRegParametric(regName, regValue, ncPrintR);
 }
 
 // ncClear (normal)
