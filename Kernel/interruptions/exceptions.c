@@ -10,8 +10,6 @@ extern void (*printHexPtr)(char*);
 extern char * getScreenModePtr();
 extern char ** getRunningProgramPtr(int index);
 
-int ok = 0;
-
 void killRunningProgram();
 
 
@@ -28,18 +26,12 @@ void exceptionDispatcher(int exception) {
 static void zero_division() {
 	printPtr("ZERO DIVISION ERROR!\n");
 	killRunningProgram();
-	if (*getScreenModePtr() == 2) {
-		ok = 1;
-	}
 
 }
 
 static void opcode(){
 	printPtr("OPCODE EXCEPTION!\n");
 	killRunningProgram();
-	if(*getScreenModePtr() == 2){
-		ok = 1;
-	}
 }
 
 void killRunningProgram(){
@@ -52,8 +44,7 @@ void killRunningProgram(){
 
 void rebootTerm(){
 
-	if (*getScreenModePtr()==1||((*getScreenModePtr()==3) && ok)){
+	if (*getScreenModePtr()==1||((*getScreenModePtr()==3))){
 		sleep(TIMEOUT);
-		ok = 0;
 	}
 }
