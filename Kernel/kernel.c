@@ -89,30 +89,40 @@ void runShell(){
 int main()
 {
 	ncClear();
-	//ncPrint("[Kernel Main]");
-	//ncNewline();
 	load_idt();
-
-	/*
-
-	ncPrint("  Sample code module at 0x");
-	ncPrintHex((uint64_t)sampleCodeModuleAddress);
+	ncPrint("[Kernel Main]");
 	ncNewline();
-	ncPrint("  Calling the sample code module returned: ");
-	ncPrintHex(((EntryPoint)sampleCodeModuleAddress)());
+	ncPrint("IDT loaded succesfully!");
 	ncNewline();
 	ncNewline();
-
-	ncPrint("  Sample data module at 0x");
-	ncPrintHex((uint64_t)sampleDataModuleAddress);
 	ncNewline();
-	ncPrint("  Sample data module contents: ");
-	ncPrint((char*)sampleDataModuleAddress);
+	ncPrint("                             WELCOME TO TEMPLE OS");
 	ncNewline();
-
-	ncPrint("[Finished]");
-
-	*/
+	ncNewline();
+	ncNewline();
+	ncPrint("                                     +");
+	ncNewline();
+	ncPrint("                                     |");
+	ncNewline();
+	ncPrint("                                    /o\\");
+	ncNewline();
+	ncPrint("                                    |~|");
+	ncNewline();
+	ncPrint("                                 ,  | |  ,");
+	ncNewline();
+	ncPrint("                                 /\\/ _ \\/\\");
+	ncNewline();
+	ncPrint("                           .-.-.-|| (_) ||-.-.-.");
+	ncNewline();
+	ncPrint("                           | # # ||  _  || # # |");
+	ncNewline();
+	ncPrint("                          _|     || ||| ||     |_");
+	ncNewline();
+	ncPrint("                            ********===********");
+	ncNewline();
+	ncPrint("                                    ===");
+	ncNewline();
+	sleep(5000);
 
 	runShell();
 	return 0;

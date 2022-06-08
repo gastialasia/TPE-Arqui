@@ -144,7 +144,6 @@ void simpleScreenWrapper(char (*fn)(void))
         }
         isRunning = fn();
     }
-    // printf("Program ended\n");
 }
 
 void returnToSingleScreen()
@@ -163,9 +162,9 @@ void SplitScreenWrapper(char (*fn1)(void), char (*fn2)(void))
     {
         if (getlast() == 'q')
         {
+            setScreenMode(1);
             returnToSingleScreen();
             storeProgram("null", "null");
-            setScreenMode(1);
             return;
         }
         if(getlast() == 17){ //F1
@@ -176,7 +175,6 @@ void SplitScreenWrapper(char (*fn1)(void), char (*fn2)(void))
         {
             setScreenMode(2);
             isRunning1 = fn1();
-            // printInt(isRunning1);
             if (isRunning1 == 0)
             {
                 storeProgram("null", command2); // En caso de ya haber terminado el programa, lo borramos de los comandos guardados en el kernel
@@ -200,7 +198,7 @@ void SplitScreenWrapper(char (*fn1)(void), char (*fn2)(void))
     }
     printf("Presione 'q' para volver a la shell");
     while (getlast() != 'q');
+    setScreenMode(1);
     returnToSingleScreen();
     storeProgram("null", "null");
-    setScreenMode(1);
 }
