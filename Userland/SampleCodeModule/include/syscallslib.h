@@ -15,5 +15,7 @@ void sys_inforeg(void);
 void sys_storeProgram(char*p1, char*p2);
 char * sys_getProgram(char id);
 void sys_snapshotRegs(void);
+unsigned char sys_getLast();
+void sys_printMem(uint64_t);
 
 #endif

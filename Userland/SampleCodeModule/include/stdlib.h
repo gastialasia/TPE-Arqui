@@ -41,6 +41,12 @@ char * getProgram(char id);
 
 unsigned char getlast();
 
+int strcpy(char *dest, const char *src);
+
 void takeSnapShot();
+
+uint32_t uintToBase(uint64_t value, char * buffer, uint32_t base);
+
+uint64_t hex2int(char *hex, int *ok);
 
 #endif

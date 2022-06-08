@@ -106,14 +106,29 @@ char nullProgram(){
 char printMemory(){
 	char pos[8] ={0};
 	printf("Ingrese 8 caracteres en hexa\n");
-	int len = scanf(pos);
+	scanf(pos);
 	int ok = 1;
 	uint64_t pointer = hex2int(pos,&ok);
 	if(ok){
-		sys_printMem(&pointer);
+		sys_printMem(pointer);
 	}else {
 	printf("Invalid dir");
 	putchar('\n');
 	}
 	return 0;
+}
+
+char opcodeProgram(){
+    opcode();
+    return 0;
+}
+
+char divzeroProgram(){
+    divzero();
+    return 0;
+}
+
+char clearProgram(){
+    clear();
+    return 0;
 }

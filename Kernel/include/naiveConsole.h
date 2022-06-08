@@ -40,9 +40,19 @@ void ncPrintReg(const char *regName, uint64_t regValue);
 void ncPrintRegL(const char *regName, uint64_t regValue);
 void ncPrintRegR(const char *regName, uint64_t regValue);
 
+void ncMoveLines();
+void ncMoveLinesL();
+void ncMoveLinesR();
+
 void ncClear();
 
 void ncSplit();
 void ncUnSplit();
+
+static uint32_t uintToBase(uint64_t value, char * buffer, uint32_t base);
+
+void ncPrintParametric(const char * str, void (*fn)(const char * string));
+
+void ncPrintRegParametric(const char*regName, uint64_t regValue, void (*fn)(char*));
 
 #endif

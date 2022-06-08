@@ -1,7 +1,5 @@
 #include <naiveConsole.h>
 
-static uint32_t uintToBase(uint64_t value, char * buffer, uint32_t base);
-
 static char buffer[64] = { '0' };
 static const uint32_t width = 80;
 static const uint32_t height = 25 ;

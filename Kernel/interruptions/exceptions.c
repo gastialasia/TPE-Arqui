@@ -12,7 +12,6 @@ extern char ** getRunningProgramPtr(int index);
 
 void killRunningProgram();
 
-
 static void zero_division();
 static void opcode();
 

@@ -11,4 +11,8 @@ char invalid(void);
 char infoRegisters(void);
 char nullProgram();
 char printMemory(void);
+char opcodeProgram();
+char divzeroProgram();
+char clearProgram();
+
 #endif

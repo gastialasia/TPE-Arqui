@@ -96,15 +96,15 @@ function_type getFuncFromString(char *str)
     }
     else if (strcmp("opcode", str))
     {
-        toRet = &opcode;
+        toRet = &opcodeProgram;
     }
     else if (strcmp("divzero", str))
     {
-        toRet = &divzero;
+        toRet = &divzeroProgram;
     }
     else if (strcmp("clear", str))
     {
-        toRet = &clear;
+        toRet = &clearProgram;
     }
     else if (strcmp("inforeg", str))
     {
