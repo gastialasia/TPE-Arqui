@@ -1,4 +1,5 @@
 #include <syscalls.h>
+#include <naiveConsole.h>
 
 #define STDIN 1
 #define LEFTSCREEN 2
@@ -94,15 +95,13 @@ void snapshotRegs(){
 	loadBackupRegs(primaryBackup, secondaryBackup);
 }
 
-void printMem(uint64_t pointer)
+void printMem(uint64_t pointer, unsigned char * buf)
 {
 	uint8_t *start = (uint8_t *)pointer;
 	for (int i = 0; i < 32; i++)
 	{
-		printHexPtr(start[i]);
-		printCharPtr(' ');
+		buf[i] = start[i];
 	}
-	printCharPtr('\n');
 }
 
 void clear()
@@ -118,7 +117,7 @@ int64_t date(char value)
 }
 
 void loadBackupRegs(registersT* regs, registersT *backup) {
-  regs->rax = backup->rax;
+  	regs->rax = backup->rax;
 	regs->rbx = backup->rbx;
 	regs->rcx = backup->rcx;
 	regs->rdx = backup->rdx;
@@ -139,26 +138,9 @@ void saveBackup() {
   saveRegisters(secondaryBackup);
 }
 
-void inforeg()
-{
-	registersT *regs;	   // Pasamos el puntero a la struct para llenarla con los valores de los registros
-	regs = primaryBackup; // en la funcion fillRegisters de libasm
-	
-	printRegPtr("RAX", regs->rax);
-	printRegPtr("RBX", regs->rbx);
-	printRegPtr("RCX", regs->rcx);
-	printRegPtr("RDX", regs->rdx);
-	printRegPtr("RDI", regs->rdi);
-	printRegPtr("RSI", regs->rsi);
-	printRegPtr("RBP", regs->rbp);
-	printRegPtr("R8", regs->r8);
-	printRegPtr("R9", regs->r9);
-	printRegPtr("R10", regs->r10);
-	printRegPtr("R11", regs->r11);
-	printRegPtr("R12", regs->r12);
-	printRegPtr("R13", regs->r13);
-	printRegPtr("R14", regs->r14);
-	printRegPtr("R15", regs->r15);
+void inforeg(registersT* regs)
+{	   					  
+	loadBackupRegs(regs, primaryBackup); 
 }
 
 int64_t getLast(){

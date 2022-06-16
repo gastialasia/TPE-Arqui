@@ -1,6 +1,6 @@
 #include <programs.h>
-#include <stdlib.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 #define LIMIT64 0b0111111111111111111111111111111111111111111111111111111111111111 //2^(63)-1
 
@@ -95,7 +95,23 @@ void reset_primo(){
 }
 
 char infoRegisters(){
-    inforeg();
+    registersT regs;
+    inforeg(&regs);
+    printReg("rax",regs.rax);
+    printReg("rbx",regs.rbx);
+    printReg("rcx",regs.rcx);
+    printReg("rdx",regs.rdx);
+    printReg("rbp",regs.rbp);
+    printReg("rdi",regs.rdi);
+    printReg("rsi",regs.rsi);
+    printReg("r8",regs.r8);
+    printReg("r9",regs.r9);
+    printReg("r10",regs.r10);
+    printReg("r11",regs.r11);
+    printReg("r12",regs.r12);
+    printReg("r13",regs.r13);
+    printReg("r14",regs.r14);
+    printReg("r15",regs.r15);
     return 0;
 }
 
@@ -109,12 +125,19 @@ char printMemory(){
 	scanf(pos);
 	int ok = 1;
 	uint64_t pointer = hex2int(pos,&ok);
-	if(ok){
-		sys_printMem(pointer);
+	unsigned char buffer[32];
+    unsigned char data[3];
+    if(ok){
+		sys_printMem(pointer,buffer);
+        for(int i=0; i < 32; i++){
+            uintToBase(buffer[i],data,16);
+            printf(data);
+            putchar(' ');
+        }
 	}else {
 	printf("Invalid dir");
-	putchar('\n');
 	}
+    putchar('\n');
 	return 0;
 }
 

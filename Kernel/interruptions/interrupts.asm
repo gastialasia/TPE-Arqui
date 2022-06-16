@@ -97,8 +97,14 @@ SECTION .text
 
 	mov rdi, %1 ; pasaje de parametro
 	call exceptionDispatcher
-	call printAllRegs
+
 	popState
+
+	call printAllRegs
+
+	mov rax, [rsp+24];
+	printReg rax, 16
+
 	pop rax ;rip esta "arriba"  en el stack
 	printReg rax, 14
 
@@ -148,7 +154,6 @@ printAllRegs: 			;Imprime los registros de la instancia en la cual se lo llamó
 	printReg r13, 11
 	printReg r14, 12
 	printReg r15, 13
-	printReg rsp, 15
 	printReg rbp, 16
 	ret
 

@@ -122,7 +122,7 @@ int main()
 	ncNewline();
 	ncPrint("                                    ===");
 	ncNewline();
-	sleep(5000);
+	sleep(3000);
 
 	runShell();
 	return 0;

@@ -16,7 +16,7 @@ int64_t read(int fd, char * buffer, size_t count);
 
 void clear();
 
-void inforeg();
+void inforeg(registersT* regs);
 
 int64_t date(char value);
 
@@ -37,5 +37,7 @@ void saveRegisters(registersT* registers);
 void loadBackup(registersT* regs, registersT* backup);
 
 void snapshotRegs();
+
+void printMem(uint64_t pointer, unsigned char * buf);
 
 #endif

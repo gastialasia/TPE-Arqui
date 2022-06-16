@@ -1,4 +1,4 @@
-#include <stdlib.h>
+#include "../include/stdlib.h"
 #include "../include/syscallslib.h"
 #include <stdint.h>
 
@@ -23,8 +23,8 @@ void printf(const char * str) {
     sys_write(STDIN, str, strlen(str));
 }
 
-void inforeg(void){
-    sys_inforeg();
+void inforeg(registersT * regs){
+    sys_inforeg(regs);
 }
 
 uint32_t uintToBase(uint64_t value, char * buffer, uint32_t base)
@@ -159,4 +159,16 @@ unsigned char getlast(){
 
 void takeSnapShot(){
     sys_snapshotRegs();
+}
+
+void printReg(const char *regName, uint64_t regValue)
+{
+  char buffer[17];
+    printf(regName);
+    printf(": ");
+    int digits = uintToBase(regValue, buffer, 16);
+    for (int i = 1; i < 16 - digits; i++)
+        printf("0");
+    printf(buffer);
+    putchar('\n');
 }

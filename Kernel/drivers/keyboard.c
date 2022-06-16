@@ -15,5 +15,6 @@ unsigned char readKey(){
 
 void keyboard_handler() {
 	key = ASCIITable[getKey()];
-	last = key;
+	if(key != 0)
+		last = key;
 }
