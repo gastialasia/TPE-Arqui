@@ -18,6 +18,7 @@ GLOBAL _exception6Handler
 GLOBAL _syscallHandler
 GLOBAL printAllRegs
 
+EXTERN getStackBase
 EXTERN syscallsetter
 EXTERN irqDispatcher
 EXTERN exceptionDispatcher
@@ -112,8 +113,8 @@ SECTION .text
 
 	mov rax,400000h; muevo el nuevo rip al principio de la shell
 	push rax
-	mov qword [esp+24],10AFC0h
-
+	call getStackBase
+	mov qword [esp+24],rax
 	iretq
 %endmacro
 
