@@ -114,7 +114,7 @@ SECTION .text
 	mov rax,400000h; muevo el nuevo rip al principio de la shell
 	push rax
 	call getStackBase
-	mov qword [esp+24],rax
+	mov qword [rsp+24],rax
 	iretq
 %endmacro
 
