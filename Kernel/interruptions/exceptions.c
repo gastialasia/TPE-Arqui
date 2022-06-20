@@ -1,4 +1,5 @@
 #include <syscalls.h>
+#include <tools.h>
 
 #define ZERO_EXCEPTION_ID 0
 #define OPCODE_EXCEPTION_ID 6
@@ -36,14 +37,13 @@ static void opcode(){
 void killRunningProgram(){
 	char screenMode = *getScreenModePtr();
 	if (screenMode>=2) {
-		*getRunningProgramPtr(screenMode-2)="null"; // Le pongo un null terminated en el primer caracter para "arruinar el string"
+		*getRunningProgramPtr(screenMode-2)="null";
 	}
 
 }
 
 void rebootTerm(){
-
-	if (*getScreenModePtr()==1||((*getScreenModePtr()==3))){
+	if (*getScreenModePtr()==1||(*getScreenModePtr()==3 && strcmp(*getRunningProgramPtr(0), "null"))){
 		sleep(TIMEOUT);
 	}
 }

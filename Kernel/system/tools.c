@@ -22,3 +22,18 @@ char isAlpha(char c){
 char isPipe(char c){
     return c==PIPE_KEY;
 }
+
+// Devuelve 1 si son iguales, 0 sino
+int strcmp(const char *str1, const char *str2){
+    int pos=0;
+    while(str1[pos]&&str2[pos]){
+        if (str1[pos]!=str2[pos]){
+            return 0;
+        }
+        pos++;
+    }
+    if(str1[pos]||str2[pos]){
+        return 0;
+    }
+    return 1;
+}
